@@ -1,0 +1,77 @@
+module Vending_Top(
+    input  logic clk,
+    input  logic rst,
+
+    // Inputs
+    input  logic confirm,
+    input  logic cancel,
+    input  logic [1:0] sel_item,
+    input  logic [1:0] coin_in,
+    // Outputs
+    output logic dispense,  
+    output logic error,
+    output logic [7:0] change_out,
+    output logic [7:0] display,
+    output logic [2:0]  state_out
+);
+// Instanciação dos sinais internos do Top Level
+//====================================================================
+    //memory signals
+    logic [7:0] mem_inst_stock;
+    logic [7:0] mem_inst_price;
+    logic       mem_inst_mem_read;
+    logic       mem_inst_mem_write;
+    logic       mem_inst_sel_item;
+    
+    //credit_reg signals
+    logic       credit_inst_credit_load;
+    logic [7:0] credit_inst_credit;
+    logic [1:0] credit_inst_coin_value;
+
+    //comparator signals
+    logic [7:0] comp_inst_stock;
+    logic [7:0] comp_inst_price;
+    logic [7:0] comp_inst_change;
+    logic [7:0] comp_inst_can_sell;
+
+    //subtractor signals
+    logic [7:0] sub_inst_credit;
+    logic [7:0] sub_inst_price;
+    logic [7:0] sub_inst_change;
+//=================================================================
+
+    // Instanciação dos módulos
+    memory mem_inst(
+        .clk(clk),
+        .rst(rst),
+        .sel_item(mem_inst_sel_item),
+        .stock(mem_inst_stock),
+        .price(mem_inst_price),
+        .mem_read(mem_inst_mem_read),
+        .mem_write(mem_inst_mem_write)
+    );
+
+    credit_reg credit_inst(
+        .clk(clk),
+        .rst(rst),
+        .credit_load(credit_inst_credit_load),
+        .coin_value(credit_inst_coin_value),
+        .credit(credit_inst_credit)
+    );
+
+    comparator comp_inst(
+        .credit(credit_inst_credit),
+        .price(mem_inst_price),
+        .stock(mem_inst_stock),
+        .can_sell(comp_inst_can_sell)
+    );
+
+    subtractor sub_inst(
+        .credit(credit_inst_credit),
+        .price(mem_inst_price),
+        .change(sub_inst_change)
+    );  
+
+    // Instanciação da Unit de Controle (FSM)
+
+endmodule
