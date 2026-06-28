@@ -107,7 +107,7 @@ module Vending_Top(
         .comp_inst_can_sell(comp_inst_can_sell),
         //credit_reg
         .credit_inst_credit_load(credit_inst_credit_load),
-        .credit_inst_coin_value(credit_inst_coin_values),
+        .credit_inst_coin_value(credit_inst_coin_value),
         .credit_inst_credit(credit_inst_credit),
         //Subtractor
         .sub_inst_credit(sub_inst_credit),
