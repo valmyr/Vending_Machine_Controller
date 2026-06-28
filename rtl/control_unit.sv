@@ -36,6 +36,8 @@ module control_vending_machine(
     input  logic [7:0] sub_inst_change
 
 );
+
+import Vending_Machine_pkg::*;
 //Continue
 
 endmodule
