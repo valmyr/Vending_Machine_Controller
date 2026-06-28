@@ -12,7 +12,7 @@ module Vending_Top(
     output logic error,
     output logic [7:0] change_out,
     output logic [7:0] display,
-    output logic [2:0]  state_out
+    output logic [2:0] state_out
 );
 // Instanciação dos sinais internos do Top Level
 //====================================================================
@@ -21,7 +21,7 @@ module Vending_Top(
     logic [7:0] mem_inst_price;
     logic       mem_inst_mem_read;
     logic       mem_inst_mem_write;
-    logic       mem_inst_sel_item;
+    logic [1:0] mem_inst_sel_item;
     
     //credit_reg signals
     logic       credit_inst_credit_load;
@@ -41,34 +41,34 @@ module Vending_Top(
 //=================================================================
 
     // Instanciação dos módulos
-    memory mem_inst(
-        .clk(clk),
-        .rst(rst),
-        .sel_item(mem_inst_sel_item),
-        .stock(mem_inst_stock),
-        .price(mem_inst_price),
-        .mem_read(mem_inst_mem_read),
-        .mem_write(mem_inst_mem_write)
+    memory u_mem_unit(
+        .clk        (clk),
+        .rst        (rst),
+        .sel_item   (mem_inst_sel_item),
+        .stock      (mem_inst_stock),
+        .price      (mem_inst_price),
+        .mem_read   (mem_inst_mem_read),
+        .mem_write  (mem_inst_mem_write)
     );
 
-    credit_reg credit_inst(
-        .clk(clk),
-        .rst(rst),
-        .credit_load(credit_inst_credit_load),
-        .coin_value(credit_inst_coin_value),
-        .credit(credit_inst_credit)
+    credit_reg u_credit_unit(
+        .clk         (clk),
+        .rst         (rst),
+        .credit_load (credit_inst_credit_load),
+        .coin_value  (credit_inst_coin_value),
+        .credit      (credit_inst_credit)
     );
 
-    comparator comp_inst(
-        .credit(credit_inst_credit),
-        .price(mem_inst_price),
-        .stock(mem_inst_stock),
+    comparator u_comp_unit(
+        .credit  (comp_inst_credit),
+        .price   (comp_inst_price),
+        .stock   (comp_inst_stock),
         .can_sell(comp_inst_can_sell)
     );
 
-    subtractor sub_inst(
-        .credit(credit_inst_credit),
-        .price(mem_inst_price),
+    subtractor u_sub_unit(
+        .credit(sub_inst_credit),
+        .price (sub_inst_price),
         .change(sub_inst_change)
     );  
 
