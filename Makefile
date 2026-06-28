@@ -32,6 +32,10 @@ compile:syntax
 run:compile
 	cd $(SIM_DIR) && \
 	./simv
+
+run_gui:compile
+	cd $(SIM_DIR) && \
+	./simv -gui
 #Passo 4: Abrir o waveform no Verdi
 waves:
 	cd $(SIM_DIR) &&\
