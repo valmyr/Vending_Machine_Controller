@@ -41,6 +41,8 @@ module Vending_Top(
 //=================================================================
 
     // Instanciação dos módulos
+
+    //Memoria
     memory u_mem_unit(
         .clk        (clk),
         .rst        (rst),
@@ -51,6 +53,7 @@ module Vending_Top(
         .mem_write  (mem_inst_mem_write)
     );
 
+    //Registardor de Creditos
     credit_reg u_credit_unit(
         .clk         (clk),
         .rst         (rst),
@@ -59,6 +62,7 @@ module Vending_Top(
         .credit      (credit_inst_credit)
     );
 
+    //Comparador
     comparator u_comp_unit(
         .credit  (comp_inst_credit),
         .price   (comp_inst_price),
@@ -66,6 +70,7 @@ module Vending_Top(
         .can_sell(comp_inst_can_sell)
     );
 
+    //Subtrator
     subtractor u_sub_unit(
         .credit(sub_inst_credit),
         .price (sub_inst_price),
@@ -73,5 +78,41 @@ module Vending_Top(
     );  
 
     // Instanciação da Unit de Controle (FSM)
+    control_vending_machine u_control_unit(
+        //Sinais globais
+        .clk(clk),
+        .rst(rst),
+        //Sinais externos
+        .cancel(cancel),
+        .coin_in(coin_in),
+        .sel_item(sel_item),
+        .confirm(confirm),
+        .error(error),
+        .dispense(dispense),
+        .change_out(change_out),
+        .display(display),
+        .state_out(state_out),
+        //Sinais internos
 
+        //memory
+        .mem_inst_stock(mem_inst_stock),
+        .mem_inst_price(mem_inst_price),
+        .mem_inst_mem_read(mem_inst_mem_read),
+        .mem_inst_mem_write(mem_inst_mem_write),
+        .mem_inst_sel_item(mem_inst_sel_item),
+        //Comparator
+        .comp_inst_credit(comp_inst_credit),
+        .comp_inst_price(comp_inst_price),
+        .comp_inst_stock(comp_inst_stock),
+        .comp_inst_can_sell(comp_inst_can_sell),
+        //credit_reg
+        .credit_inst_credit_load(credit_inst_credit_load),
+        .credit_inst_coin_value(credit_inst_coin_values),
+        .credit_inst_credit(credit_inst_credit),
+        //Subtractor
+        .sub_inst_credit(sub_inst_credit),
+        .sub_inst_price(sub_inst_price),
+        .sub_inst_change(sub_inst_change)
+
+    );
 endmodule
