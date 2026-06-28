@@ -7,9 +7,13 @@ TB_FILES=../list_file_tb.lst
 TOP=tb
 
 
+#Passo 0: Criar diretório de simulação
+init:
+	mkdir -p $(SIM_DIR)
+
 #Passo 1: Verificação de Sintaxe
 
-syntax:
+syntax:init
 	cd $(SIM_DIR)				&& \
 		 vlogan -full64 		\
 		 -sverilog			    \
