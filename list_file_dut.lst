@@ -1,7 +1,7 @@
+../rtl/vending_pkg.sv
 ../rtl/comparator.sv
 ../rtl/control_unit.sv
 ../rtl/credit_reg.sv
 ../rtl/memory.sv
 ../rtl/subtractor.sv
-../rtl/vending_pkg.sv
 ../rtl/vending_top.sv
