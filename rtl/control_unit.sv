@@ -4,7 +4,7 @@ module control_vending_machine(
     input logic cancel,
     input logic [1:0]coin_in,
     input logic confirm,
-    input logic sel_item,
+    input logic [1:0]sel_item,
 
 
     output logic error,
