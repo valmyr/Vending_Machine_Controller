@@ -1,2 +1,4 @@
 file_gen.sh
 sim
+lib/*
+!lib/empty.txt
