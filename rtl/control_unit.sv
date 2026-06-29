@@ -20,7 +20,7 @@ module control_vending_machine(
     input  logic [7:0] mem_inst_price,
     output logic       mem_inst_mem_read,
     output logic       mem_inst_mem_write,
-    output logic       mem_inst_sel_item,
+    output logic  [1:0]mem_inst_sel_item,
     //Comparator
     output logic [7:0] comp_inst_credit,
     output logic [7:0] comp_inst_price,

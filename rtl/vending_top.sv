@@ -29,9 +29,9 @@ module Vending_Top(
     logic [1:0] credit_inst_coin_value;
 
     //comparator signals
-    logic [7:0] comp_inst_stock;
+    logic [7:0] comp_inst_credit;
     logic [7:0] comp_inst_price;
-    logic [7:0] comp_inst_change;
+    logic [7:0] comp_inst_stock;
     logic [7:0] comp_inst_can_sell;
 
     //subtractor signals
