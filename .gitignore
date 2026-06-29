@@ -3,3 +3,4 @@ sim
 lib/*
 !lib/empty.txt
 synth/vending_mapeada.ddc
+*.log
