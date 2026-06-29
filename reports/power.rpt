@@ -1,0 +1,59 @@
+ 
+****************************************
+Report : power
+        -analysis_effort low
+Design : Vending_Top
+Version: X-2025.06-SP2
+Date   : Mon Jun 29 01:18:40 2026
+****************************************
+
+
+Library(s) Used:
+
+    saed32rvt_tt1p05v25c (File: /home/valmir.silva/Vending_Machine_Controller/lib/saed32rvt_tt1p05v25c.db)
+
+
+Operating Conditions: tt1p05v25c   Library: saed32rvt_tt1p05v25c
+Wire Load Model Mode: enclosed
+
+Design        Wire Load Model            Library
+------------------------------------------------
+Vending_Top            8000              saed32rvt_tt1p05v25c
+
+
+Global Operating Voltage = 1.05 
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000ff
+    Time Units = 1ns
+    Dynamic Power Units = 1uW    (derived from V,C,T units)
+    Leakage Power Units = 1pW
+
+
+Attributes
+----------
+i - Including register clock pin internal power
+
+
+  Cell Internal Power  =  46.0707 uW   (76%)
+  Net Switching Power  =  14.8987 uW   (24%)
+                         ---------
+Total Dynamic Power    =  60.9694 uW  (100%)
+
+Cell Leakage Power     =  85.8283 uW
+
+Information: report_power power group summary does not include estimated clock tree power. (PWR-789)
+
+                 Internal         Switching           Leakage            Total
+Power Group      Power            Power               Power              Power   (   %    )  Attrs
+--------------------------------------------------------------------------------------------------
+io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
+black_box          0.0000            3.2363            0.0000            3.2363  (   2.20%)
+clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)  i
+register           0.0000            0.0000            0.0000            0.0000  (   0.00%)
+sequential        23.4216            0.1984        5.8008e+07           81.6282  (  55.61%)
+combinational     22.6490           11.4640        2.7820e+07           61.9332  (  42.19%)
+--------------------------------------------------------------------------------------------------
+Total             46.0707 uW        14.8987 uW     8.5828e+07 pW       146.7977 uW
+1
