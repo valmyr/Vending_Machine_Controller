@@ -19,8 +19,9 @@ syntax:init
 		 -sverilog			    \
 		 -kdb     			    \
 		 +lint=all			    \
+		 -timescale=1ns/1ps		\
 		 -f $(RTL_FILES)		\
-		 -f $(TB_FILES)		
+		-f $(TB_FILES)		
 
 syntax_pos_impl:
 	cd $(SIM_DIR)				&& \
