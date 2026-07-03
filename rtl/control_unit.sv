@@ -48,13 +48,13 @@ always_comb begin
     case (state)
         IDLE: begin
             if (|coin_in != 0) begin
-                clr = 0;
+                // clr = 0;
                 credit_load = 1'b1;
                 next_state = COLLECT;
             end
 
             else begin
-                clr = 1'b1;
+                // clr = 1'b1;
                 next_state = IDLE;
             end
         end
@@ -63,11 +63,14 @@ always_comb begin
             credit_load = |coin_in;
 
             if (cancel) begin
+                clr = 1'b1;
+                en_change = 1'b1;
                 next_state = IDLE;
             end
 
             else if (confirm) begin
                 next_state = CHECK;
+                mem_read = 1'b1;
             end
 
             else begin
@@ -76,8 +79,6 @@ always_comb begin
         end
 
         CHECK: begin
-            mem_read = 1'b1;
-
             if (can_sell) begin
                 next_state = DISPENSE;
             end
@@ -96,12 +97,14 @@ always_comb begin
         CHANGE: begin
             en_change = 1'b1;
             next_state = IDLE;
+            clr = 1'b1;
         end
 
         ERROR: begin
             error = 1'b1;
             
             if (cancel) begin
+                clr = 1'b1;
                 en_change = 1'b1;
                 next_state = IDLE; 
             end

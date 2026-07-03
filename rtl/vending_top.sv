@@ -23,11 +23,12 @@ module Vending_Top(
     logic       mem_write;
     logic [1:0] sel_item;
     logic       en_change;
+    logic       clr;
     
     //credit_reg signals
     logic       credit_load;
     logic [7:0] credit;
-    logic [1:0] coin_value;
+    logic       cancel_reg;
 
     //comparator signals
     logic       can_sell;
@@ -36,14 +37,48 @@ module Vending_Top(
 
     assign display = credit;
 
-    always @ (posedge clk) begin
+    // always_ff @ (posedge clk) begin
+    //     if (rst) begin
+    //         change_out <= 0;
+    //     end
+
+    //     else begin
+    //         /*
+    //             Se a compra não for bem sucedida, deve-se devolver o
+    //             credito do usuário, senão devolve a saída do subtrator.
+    //         */
+    //         if (cancel) begin
+    //             change_out <= en_change ? credit : 0;
+    //         end
+
+    //         else begin
+    //             change_out <= en_change ? change : 0;
+    //         end
+    //     end
+    // end
+
+    always_ff @ (posedge clk) begin
         if (rst) begin
-            change_out <= 0;
+            cancel_reg <= 0;
         end
 
         else begin
-            change_out <= en_change ? change : change_out;
+            cancel_reg <= cancel;
         end
+    end
+
+    always_comb begin
+            /*
+                Se a compra não for bem sucedida, deve-se devolver o
+                credito do usuário, senão devolve a saída do subtrator.
+            */
+            if (cancel_reg) begin
+                change_out = en_change ? credit : 0;
+            end
+
+            else begin
+                change_out = en_change ? change : 0;
+            end
     end
 
     // Instanciação dos módulos
@@ -67,7 +102,7 @@ module Vending_Top(
         .clr(clr),
 
         .credit(credit),
-        .coin_value(coin_value),
+        .coin_value(coin_in),
         .credit_load(credit_load)
     );
 
@@ -94,7 +129,7 @@ module Vending_Top(
         .can_sell(can_sell),
         .coin_in(coin_in),
         .confirm(confirm),
-        .cancel(cancel),
+        .cancel(cancel_reg),
 
         .credit_load(credit_load),
         .mem_write(mem_write),
