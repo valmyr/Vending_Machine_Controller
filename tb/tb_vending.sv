@@ -1,83 +1,135 @@
-parameter PERIOD = 10ns;
-parameter NUMBER_OF_CYCLES = 5; //Número de ciclos da simulação, ajuste conforme a necessidade.
-
-string TDBG_COLOR_RED     ="\x1b[31m";
-string TDBG_COLOR_GREEN   ="\x1b[32m";
-string TDBG_COLOR_YELLOW  ="\x1b[33m";
-string TDBG_COLOR_BLUE    ="\x1b[34m";
-string TDBG_COLOR_RESET   ="\x1b[0m";
-
 module tb;
-import Vending_Machine_pkg::*;
+    import Vending_Machine_pkg::*;
+    localparam PERIOD = 10;
 
+    logic       clk;
+    logic       rst;
 
-logic       tb_clk;
-logic       tb_rst;
-logic       tb_confirm;
-logic       tb_cancel;
-logic [1:0] tb_sel_item;
-logic [1:0] tb_coin_in;
-logic       tb_dispense;
-logic       tb_error;
-logic [7:0] tb_change_out;
-logic [7:0] tb_display;
-logic [2:0] tb_state_out;
-Vending_Top vending_machine_uut(
-    .clk        (tb_clk),
-    .rst        (tb_rst),
-    .confirm    (tb_confirm),
-    .cancel     (tb_cancel),
-    .sel_item   (tb_sel_item),
-    .coin_in    (tb_coin_in),
-    .dispense   (tb_dispense),
-    .error      (tb_error),
-    .change_out (tb_change_out),
-    .display    (tb_display),
-    .state_out  (tb_state_out)
-);
-//Inicialização de sinais
-initial begin
-    tb_clk = 0;
-    tb_rst = 1;
-    #(PERIOD) //Ciclo 1 de espera do reset
-    #(PERIOD) //Ciclo 2 de espera do reset
-    tb_rst = 0;
-end
-//Gerador de Clock 
-always #(PERIOD/2) tb_clk = ~tb_clk;
+    logic       confirm;
+    logic       cancel;
+    logic [1:0] coin_in;
+    logic [1:0] sel_item;
 
-initial begin
-    apply_coin(.value(2'b00),.coin_in(tb_coin_in));
-    apply_coin(.value(2'b01),.coin_in(tb_coin_in));
-    apply_coin(.value(2'b10),.coin_in(tb_coin_in));
-    apply_coin(.value(2'b11),.coin_in(tb_coin_in));
-end
-//waveform dump
-initial begin
-  // Basic: dump all signals from tb_top downward, all hierarchy
-  $fsdbDumpfile("waves.fsdb");
-  $fsdbDumpvars(0, tb);         // 0 = all levels of hierarchy
-  // Dump multi-dimensional arrays (memories, packed arrays)
-  $fsdbDumpMDA();
-  // Optional: stop dumping after N ns to limit file size
-  #(PERIOD*NUMBER_OF_CYCLES);
-  $fsdbDumpoff;
-  $finish;
-end
-endmodule
+    logic [7:0] display;
+    logic [7:0] change_out;
+    fsm_state_t state_out;
+    logic       dispense;
+    logic       error;
 
+    task reset_machine;
+        rst = 1'b1;
+        #(2*PERIOD);
+        rst = 0;
+    endtask
 
-task apply_coin;
-//3. Tarefa apply_coin(value) que aplica uma moeda e aguarda 1 ciclo
-	input logic [1:0] value;
-    output logic[1:0] coin_in;
-	begin
-        $display(TDBG_COLOR_RED,"value=",value,TDBG_COLOR_RESET);
-        coin_in = value;
+    task buy_item(input logic [1:0] item, input logic [1:0] coins);
+        apply_coin(coins);
+        select_item(item);
+        confirm_purchase();
+        
+        wait (state_out == ERROR || state_out == DISPENSE);
+
+        if (state_out == ERROR) begin
+            #(0.5*PERIOD);
+            cancel_purchase();
+        end
+
+        else begin
+            wait (state_out == IDLE);
+            #(PERIOD);
+        end
+    endtask
+
+    task apply_coin(input logic [1:0] value);
+        coin_in = value; 
         #(PERIOD);
+        coin_in = 0;
+    endtask
 
-	end
-endtask
+    task confirm_purchase;
+        confirm = 1'b1;
+        #(PERIOD);
+        confirm = 0;
+    endtask
 
-//4. Tarefa buy_item(item, coins[]) que executa uma compra completa
-//5. Tarefa check(expected, actual, label) que reporta PASS/FAIL
+    task select_item(input logic[1:0] item);
+        sel_item = item;
+        #(PERIOD);
+    endtask
+
+    task cancel_purchase;
+        cancel = 1'b1;
+        #(PERIOD);
+        cancel = 0;
+    endtask
+
+    Vending_Top vending_top(
+        .clk(clk),
+        .rst(rst),
+
+        .coin_in(coin_in),
+        .sel_item(sel_item),
+        .confirm(confirm),
+        .cancel(cancel),
+        
+        .change_out(change_out),
+        .state_out(state_out),
+        .dispense(dispense),
+        .display(display),  
+        .error(error)
+    );
+
+    always begin
+        #(PERIOD/2); 
+        clk = ~clk;
+    end
+
+    initial begin
+        // Basic: dump all signals from tb_top downward, all hierarchy
+        $fsdbDumpfile("waves.fsdb");
+        $fsdbDumpvars(0, tb);         // 0 = all levels of hierarchy
+        // Dump multi-dimensional arrays (memories, packed arrays)
+        $fsdbDumpMDA();
+        // Optional: stop dumping after N ns to limit file size
+        #(4000);
+        $fsdbDumpoff;
+        $finish;
+    end
+
+    initial begin
+        clk = 0;
+        confirm = 0;
+        cancel = 0;
+        coin_in = 0;
+        sel_item = 3;
+
+        reset_machine();
+
+        // Caso 1
+        buy_item(
+            .item(2'b00), 
+            .coins(2'b11)
+        );
+
+        // Caso 2
+        buy_item(
+            .item(2'b11), 
+            .coins(2'b01)
+        );
+
+        // Caso 3
+        apply_coin(11);
+        apply_coin(11);
+        cancel_purchase();
+
+        reset_machine();
+
+        repeat(6) begin
+            buy_item(
+                .item(2'b00), 
+                .coins(2'b01)
+            );
+        end
+    end
+
+endmodule
