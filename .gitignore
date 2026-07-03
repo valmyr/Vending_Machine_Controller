@@ -1,6 +1,7 @@
 file_gen.sh
-sim
+sim/*
 lib/*
 !lib/empty.txt
+!sim/tb_vending_machine.rc
 synth/vending_mapeada.ddc
 *.log

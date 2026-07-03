@@ -3,6 +3,7 @@ SIM_DIR=sim
 #Arquivos
 RTL_FILES=../list_file_dut.lst
 TB_FILES=../list_file_tb.lst
+WAVE_CONFIG =
 #Top do testbench
 TOP=tb
 
@@ -72,7 +73,7 @@ run_gui_pos_impl:compile_pos_impl
 #Passo 4: Abrir o waveform no Verdi
 waves:run
 	cd $(SIM_DIR) &&\
-	verdi -ssf waves.fsdb &
+	verdi -ssf waves.fsdb -sswr tb_vending_machine.rc
 #Limpeza
 clean:
 	cd $(SIM_DIR) &&\
