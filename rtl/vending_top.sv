@@ -37,26 +37,6 @@ module Vending_Top(
 
     assign display = credit;
 
-    // always_ff @ (posedge clk) begin
-    //     if (rst) begin
-    //         change_out <= 0;
-    //     end
-
-    //     else begin
-    //         /*
-    //             Se a compra não for bem sucedida, deve-se devolver o
-    //             credito do usuário, senão devolve a saída do subtrator.
-    //         */
-    //         if (cancel) begin
-    //             change_out <= en_change ? credit : 0;
-    //         end
-
-    //         else begin
-    //             change_out <= en_change ? change : 0;
-    //         end
-    //     end
-    // end
-
     always_ff @ (posedge clk) begin
         if (rst) begin
             cancel_reg <= 0;
@@ -81,7 +61,6 @@ module Vending_Top(
             end
     end
 
-    // Instanciação dos módulos
     //Memoria
     memory u_mem_unit(
         .clk(clk),
