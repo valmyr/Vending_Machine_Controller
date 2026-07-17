@@ -1,0 +1,85 @@
+{
+    "Version": "X-2025.06-SP3",
+    "Module": "control_unit",
+    "Source File": "/home/valmir.silva/Vending_Machine_Controller/rtl/control_unit.sv",
+    "Start Line": 1,
+    "End Line": 123,
+    "Ports": [
+        {
+            "PortName": "clk",
+            "Direction": "input"
+        },
+        {
+            "PortName": "rst",
+            "Direction": "input"
+        },
+        {
+            "PortName": "can_sell",
+            "Direction": "input"
+        },
+        {
+            "PortName": "coin_in",
+            "Direction": "input",
+            "Bits": [
+                "coin_in[1]",
+                "coin_in[0]"
+            ]
+        },
+        {
+            "PortName": "confirm",
+            "Direction": "input"
+        },
+        {
+            "PortName": "cancel",
+            "Direction": "input"
+        },
+        {
+            "PortName": "credit_load",
+            "Direction": "output"
+        },
+        {
+            "PortName": "en_change",
+            "Direction": "output"
+        },
+        {
+            "PortName": "mem_write",
+            "Direction": "output"
+        },
+        {
+            "PortName": "mem_read",
+            "Direction": "output"
+        },
+        {
+            "PortName": "clr",
+            "Direction": "output"
+        },
+        {
+            "PortName": "state_out",
+            "Direction": "output",
+            "Bits": [
+                "state_out[3]",
+                "state_out[2]",
+                "state_out[1]",
+                "state_out[0]"
+            ]
+        },
+        {
+            "PortName": "dispense",
+            "Direction": "output"
+        },
+        {
+            "PortName": "error",
+            "Direction": "output"
+        }
+    ],
+    "Cells": [
+        {
+            "CellName": "state",
+            "Bits": [
+                "state_reg[0]",
+                "state_reg[1]",
+                "state_reg[2]"
+            ]
+        }
+    ]
+}

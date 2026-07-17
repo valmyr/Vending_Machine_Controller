@@ -1,0 +1,10 @@
+                                         Status
+Command                 Accepted   Rejected    Pending Unprocessed     Total
+----------------------------------------------------------------------------
+change_names        :          5          0          0          0          5
+environment         :          8          0          0          0          8
+inv_push            :          4          0          0          0          4
+reg_constant        :         65          0          0          0         65
+ungroup             :          5          0          0          0          5
+----------------------------------------------------------------------------
+Total               :         87          0          0          0         87

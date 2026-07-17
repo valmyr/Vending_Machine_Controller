@@ -1,0 +1,838 @@
+cd sim 				  &&\
+dc_shell -f ../synth/synth.tcl
+Info: [VCS_SAVE_RESTORE_INFO] ASLR (Address Space Layout Randomization) is detected on the machine. To enable $save functionality, ASLR will be switched off and simv re-executed.
+Please use '-no_save' simv switch to avoid this.
+
+                           Design Compiler Graphical 
+                                 DC Ultra (TM)
+                                  DFTMAX (TM)
+                              Power Compiler (TM)
+                                 DesignWare (R)
+                                 DC Expert (TM)
+                               Design Vision (TM)
+                               HDL Compiler (TM)
+                               VHDL Compiler (TM)
+                                  DFT Compiler
+                               Design Compiler(R)
+
+               Version X-2025.06-SP2 for linux64 - Aug 27, 2025 
+
+                    Copyright (c) 1988 - 2025 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+Initializing...
+Current time:       Fri Jul 17 18:37:36 2026
+Hostname:           srv-microeletronica3
+CPU Model:          INTEL(R) XEON(R) GOLD 6526Y
+CPU Details:        Cores = 1 : Sockets = 1 : Cache Size = 38400 KB : Freq = 2.80 GHz
+OS:                 Linux 4.18.0-553.132.1.el8_10.x86_64
+RAM:                251 GB (Free 185 GB)
+Swap:                15 GB (Free  11 GB)
+Work Filesystem:    /home mounted to /dev/sda1
+Tmp Filesystem:     / mounted to /dev/sdb2
+Work Disk:          3724 GB (Free 3532 GB)
+Tmp Disk:            99 GB (Free  83 GB)
+
+CPU Load: 651%, Ram Free: 185 GB, Swap Free: 11 GB, Work Disk Free: 3532 GB, Tmp Disk Free: 83 GB
+# ============================================================
+# Script de Síntese - SAED32_EDK
+# Suporte a SystemVerilog (.sv)
+# ============================================================
+# 1. CARREGAR CONFIGURAÇÃO
+source ../synth/.synopsys_dc.setup
+
+==================================================
+Design Compiler Setup
+==================================================
+
+ROOT_DIR
+/home/valmir.silva/Vending_Machine_Controller/sim
+
+search_path
+/home/valmir.silva/Vending_Machine_Controller/sim /home/valmir.silva/Vending_Machine_Controller/sim/../rtl /home/valmir.silva/Vending_Machine_Controller/sim/../lib
+
+target_library
+saed32rvt_tt1p05v25c.db
+
+link_library
+* saed32rvt_tt1p05v25c.db dw_foundation.sldb
+
+Testando acesso �s bibliotecas
+==================================================
+
+# 2. LEAR O ARQUIVO RTL (SYSTEMVERILOG)
+set FILE_LIST [open "../list_file_dut.lst" r]
+file14
+set SV_FILES [split [string trim [read $FILE_LIST]] "\n"]
+../rtl/vending_pkg.sv ../rtl/comparator.sv ../rtl/control_unit.sv ../rtl/credit_reg.sv ../rtl/memory.sv ../rtl/subtractor.sv ../rtl/vending_top.sv
+close $FILE_LIST
+analyze -format sverilog $SV_FILES
+Running PRESTO HDLC
+Compiling source file ../rtl/vending_pkg.sv
+Warning:  ../rtl/vending_pkg.sv:1: The package Vending_Machine_pkg has already been analyzed. It is being replaced. (VER-26)
+Compiling source file ../rtl/comparator.sv
+Compiling source file ../rtl/control_unit.sv
+Compiling source file ../rtl/credit_reg.sv
+Compiling source file ../rtl/memory.sv
+Compiling source file ../rtl/subtractor.sv
+Compiling source file ../rtl/vending_top.sv
+Warning:  ../rtl/vending_top.sv:24: Redeclaration of port 'sel_item'. (VER-331)
+Presto compilation completed successfully.
+Loading db file '/home/valmir.silva/Vending_Machine_Controller/lib/saed32rvt_tt1p05v25c.db'
+Loading db file '/Tools/synopsys/syn/X-2025.06-SP2/libraries/syn/dw_foundation.sldb'
+1
+# 3. ELABORAR O DESIGN
+elaborate Vending_Top
+Loading db file '/Tools/synopsys/syn/X-2025.06-SP2/libraries/syn/gtech.db'
+Loading db file '/Tools/synopsys/syn/X-2025.06-SP2/libraries/syn/standard.sldb'
+  Loading link library 'saed32rvt_tt1p05v25c'
+  Loading link library 'gtech'
+Running PRESTO HDLC
+
+Inferred memory devices in process in routine 'Vending_Top' in file
+	 ../rtl/vending_top.sv'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|   cancel_reg_reg    | Flip-flop |   1   |  N  | N  | None  | None  | N  |  40  |
+==================================================================================
+Presto compilation completed successfully. (Vending_Top)
+Module: Vending_Top, Ports: 29, Input: 8, Output: 21, Inout: 0
+Module: Vending_Top, Registers: 1, Async set/reset: 0, Sync set/reset: 0
+Information: Module Vending_Top report end. (ELAB-965)
+Elaborated 1 design.
+Current design is now 'Vending_Top'.
+Information: Building the design 'memory'. (HDL-193)
+
+Inferred memory devices in process in routine 'memory' in file
+	 ../rtl/memory.sv'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|  memory_array_reg   | Flip-flop |  64   |  Y  | N  | None  | None  | N  |  14  |
+|      stock_reg      | Flip-flop |   8   |  Y  | N  | None  | None  | N  |  14  |
+|      price_reg      | Flip-flop |   8   |  Y  | N  | None  | None  | N  |  14  |
+==================================================================================
+Statistics for MUX_OPs
+======================================================
+| block name/line  | Inputs | Outputs | # sel inputs |
+======================================================
+|    memory/25     |   4    |   16    |      2       |
+======================================================
+Presto compilation completed successfully. (memory)
+Module: memory, Ports: 22, Input: 6, Output: 16, Inout: 0
+Module: memory, Registers: 80, Async set/reset: 0, Sync set/reset: 0
+Information: Module memory report end. (ELAB-965)
+Information: Building the design 'credit_reg'. (HDL-193)
+
+Inferred memory devices in process in routine 'credit_reg' in file
+	 ../rtl/credit_reg.sv'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|       mem_reg       | Flip-flop |  32   |  Y  | N  | None  | None  | N  |  12  |
+|     credit_reg      | Flip-flop |   8   |  Y  | N  | None  | None  | N  |  12  |
+==================================================================================
+Statistics for MUX_OPs
+======================================================
+| block name/line  | Inputs | Outputs | # sel inputs |
+======================================================
+|  credit_reg/24   |   4    |    8    |      2       |
+======================================================
+Presto compilation completed successfully. (credit_reg)
+Module: credit_reg, Ports: 14, Input: 6, Output: 8, Inout: 0
+Module: credit_reg, Registers: 40, Async set/reset: 0, Sync set/reset: 0
+Information: Module credit_reg report end. (ELAB-965)
+Information: Building the design 'comparator'. (HDL-193)
+Presto compilation completed successfully. (comparator)
+Module: comparator, Ports: 25, Input: 24, Output: 1, Inout: 0
+Module: comparator, Registers: 0, Async set/reset: 0, Sync set/reset: 0
+Information: Module comparator report end. (ELAB-965)
+Information: Building the design 'subtractor'. (HDL-193)
+Presto compilation completed successfully. (subtractor)
+Module: subtractor, Ports: 24, Input: 16, Output: 8, Inout: 0
+Module: subtractor, Registers: 0, Async set/reset: 0, Sync set/reset: 0
+Information: Module subtractor report end. (ELAB-965)
+Information: Building the design 'control_unit'. (HDL-193)
+
+Statistics for case statements in always block in file
+	'../rtl/control_unit.sv'
+===========================================================
+|    Line    |  full/ parallel  |      block location     |
+===========================================================
+|     48     |    auto/auto     | always block at line 35 |
+===========================================================
+
+Inferred memory devices in process in routine 'control_unit' in file
+	 ../rtl/control_unit.sv'.
+==================================================================================
+|    Register Name    |   Type    | Width | Bus | MB |  Set  | Reset | ST | Line |
+==================================================================================
+|      state_reg      | Flip-flop |   3   |  Y  | N  | None  | None  | N  |  25  |
+==================================================================================
+Presto compilation completed successfully. (control_unit)
+Module: control_unit, Ports: 17, Input: 7, Output: 10, Inout: 0
+Module: control_unit, Registers: 3, Async set/reset: 0, Sync set/reset: 0
+Information: Module control_unit report end. (ELAB-965)
+1
+# ---- synth.tcl (trecho) — adição para gerar o guidance SVF ----
+# ... (target_library, link_library, analyze, elaborate, link,
+# read_sdc vending.sdc, check_design — como na atividade anterior)
+# Grava o histórico de otimizações do Design Compiler a partir daqui.
+# Precisa vir ANTES de compile_ultra para capturar toda a compilação.
+set_svf ../fm/reports/default.svf
+1
+compile_ultra -no_autoungroup
+Information: Performing leakage power optimization. (PWR-850)
+CPU Load: 10%, Ram Free: 185 GB, Swap Free: 11 GB, Work Disk Free: 3532 GB, Tmp Disk Free: 83 GB
+Alib files are up-to-date.
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | X-2025.06-DWBB_202506.2 |     *     |
+| Licensed DW Building Blocks        | X-2025.06-DWBB_202506.2 |     *     |
+============================================================================
+
+====================================================================================================
+| Flow Information                                                                                 |
+----------------------------------------------------------------------------------------------------
+| Flow         | Design Compiler WLM                                                               |
+| Command Line | compile_ultra -no_autoungroup                                                     |
+====================================================================================================
+| Design Information                                      | Value                                  |
+====================================================================================================
+| Number of Scenarios                                     | 0                                      |
+| Leaf Cell Count                                         | 234                                    |
+| Number of User Hierarchies                              | 5                                      |
+| Sequential Cell Count                                   | 124                                    |
+| Macro Count                                             | 0                                      |
+| Pad Count                                               | 0                                      |
+| Number of Power Domains                                 | 0                                      |
+| Number of Path Groups                                   | 1                                      |
+| Number of VT Class                                      | 1                                      |
+| Number of Clocks                                        | 0                                      |
+| Number of Dont Touch Cells                              | 48                                     |
+| Number of Dont Touch Nets                               | 0                                      |
+| Number of Size Only Cells                               | 0                                      |
+| Design with Target Library Subset (with clock_path)     | false  (false )                        |
+| Design with UPF Data                                    | false                                  |
+====================================================================================================
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+
+Information: There are 4 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+  Simplifying Design 'Vending_Top'
+
+Loaded alib file './alib-52/saed32rvt_tt1p05v25c.db.alib'
+CPU Load: 10%, Ram Free: 185 GB, Swap Free: 11 GB, Work Disk Free: 3532 GB, Tmp Disk Free: 83 GB
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'memory'
+Information: The register 'memory_array_reg[0][8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[0][9]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[0][10]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[0][11]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[0][12]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[0][13]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[0][14]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[0][15]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[1][8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[1][9]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[1][10]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[1][11]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[1][12]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[1][13]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[1][14]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[1][15]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[2][8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[2][9]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[2][10]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[2][11]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[2][12]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[2][13]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[2][14]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[2][15]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[3][8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[3][9]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[3][10]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[3][11]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[3][12]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[3][13]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[3][14]' is a constant and will be removed. (OPT-1206)
+Information: The register 'memory_array_reg[3][15]' is a constant and will be removed. (OPT-1206)
+Information: The register 'price_reg[7]' is a constant and will be removed. (OPT-1206)
+ Implement Synthetic for 'memory'.
+  Processing 'credit_reg'
+Information: The register 'mem_reg[0][0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[0][1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[0][2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[0][3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[0][4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[0][5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[0][6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[0][7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[1][0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[1][1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[1][2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[1][3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[1][4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[1][5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[1][6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[1][7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[2][0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[2][1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[2][2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[2][3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[2][4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[2][5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[2][6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[2][7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[3][0]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[3][1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[3][2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[3][3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[3][4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[3][5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[3][6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'mem_reg[3][7]' is a constant and will be removed. (OPT-1206)
+ Implement Synthetic for 'credit_reg'.
+  Processing 'Vending_Top'
+  Processing 'control_unit'
+  Processing 'comparator'
+ Implement Synthetic for 'comparator'.
+Information: Added key list 'DesignWare' to design 'comparator'. (DDB-72)
+  Processing 'subtractor'
+ Implement Synthetic for 'subtractor'.
+CPU Load: 10%, Ram Free: 185 GB, Swap Free: 11 GB, Work Disk Free: 3532 GB, Tmp Disk Free: 83 GB
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: The library cell 'PMT3_RVT' in the library 'saed32rvt_tt1p05v25c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_RVT' in the library 'saed32rvt_tt1p05v25c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_RVT' in the library 'saed32rvt_tt1p05v25c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_RVT' in the library 'saed32rvt_tt1p05v25c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_RVT' in the library 'saed32rvt_tt1p05v25c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_RVT' in the library 'saed32rvt_tt1p05v25c' is not characterized for internal power. (PWR-536)
+Information: The target library(s) contains cell(s), other than black boxes, that are not characterized for internal power. (PWR-24)
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+Information: Added key list 'DesignWare' to design 'memory'. (DDB-72)
+Information: Added key list 'DesignWare' to design 'credit_reg'. (DDB-72)
+Information: Added key list 'DesignWare' to design 'subtractor'. (DDB-72)
+  Mapping Optimization (Phase 1)
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:02     939.3      0.00       0.0       0.0                           120912192.0000
+    0:00:02     939.3      0.00       0.0       0.0                           120912192.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Constant Register Removal
+  -----------------------------------
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Global Optimizations
+  ------------------------------
+  Numerical Synthesis (Phase 1)
+  Numerical Synthesis (Phase 2)
+  Global Optimization (Phase 1)
+  Global Optimization (Phase 2)
+  Global Optimization (Phase 3)
+  Global Optimization (Phase 4)
+  Global Optimization (Phase 5)
+  Global Optimization (Phase 6)
+  Global Optimization (Phase 7)
+  Global Optimization (Phase 8)
+  Global Optimization (Phase 9)
+  Global Optimization (Phase 10)
+  Global Optimization (Phase 11)
+  Global Optimization (Phase 12)
+  Global Optimization (Phase 13)
+  Global Optimization (Phase 14)
+  Global Optimization (Phase 15)
+  Global Optimization (Phase 16)
+  Global Optimization (Phase 17)
+  Global Optimization (Phase 18)
+  Global Optimization (Phase 19)
+  Global Optimization (Phase 20)
+  Global Optimization (Phase 21)
+  Global Optimization (Phase 22)
+  Global Optimization (Phase 23)
+  Global Optimization (Phase 24)
+  Global Optimization (Phase 25)
+  Global Optimization (Phase 26)
+  Global Optimization (Phase 27)
+  Global Optimization (Phase 28)
+  Global Optimization (Phase 29)
+  Global Optimization (Phase 30)
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Isolate Ports
+  -----------------------
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Delay Optimization
+  ----------------------------
+    0:00:02     887.5      0.00       0.0       0.0                           103388672.0000
+    0:00:02     887.5      0.00       0.0       0.0                           103388672.0000
+    0:00:02     887.5      0.00       0.0       0.0                           103388672.0000
+    0:00:02     887.5      0.00       0.0       0.0                           103388672.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+    0:00:02     886.5      0.00       0.0       0.0                           103192840.0000
+    0:00:02     886.5      0.00       0.0       0.0                           103192840.0000
+
+  Beginning WLM Backend Optimization
+  --------------------------------------
+    0:00:02     885.7      0.00       0.0       0.0                           102915320.0000
+    0:00:02     885.7      0.00       0.0       0.0                           102915320.0000
+    0:00:02     885.7      0.00       0.0       0.0                           102915320.0000
+    0:00:02     885.7      0.00       0.0       0.0                           102915320.0000
+    0:00:03     885.7      0.00       0.0       0.0                           102915320.0000
+    0:00:03     884.9      0.00       0.0       0.0                           102702848.0000
+    0:00:03     884.9      0.00       0.0       0.0                           102702848.0000
+    0:00:03     884.9      0.00       0.0       0.0                           102702848.0000
+    0:00:03     884.9      0.00       0.0       0.0                           102702848.0000
+    0:00:03     884.9      0.00       0.0       0.0                           102702848.0000
+    0:00:03     884.9      0.00       0.0       0.0                           102702848.0000
+    0:00:03     884.9      0.00       0.0       0.0                           102702848.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+    0:00:03     884.9      0.00       0.0       0.0                           101062776.0000
+CPU Load: 10%, Ram Free: 185 GB, Swap Free: 11 GB, Work Disk Free: 3532 GB, Tmp Disk Free: 83 GB
+Loading db file '/home/valmir.silva/Vending_Machine_Controller/lib/saed32rvt_tt1p05v25c.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: There is no defined clock in the design. (PWR-80)
+CPU Load: 9%, Ram Free: 185 GB, Swap Free: 11 GB, Work Disk Free: 3532 GB, Tmp Disk Free: 83 GB
+Information: Total number of MV cells in the design.
+----------------------------------------------------------------------------------------------------
+ MV Cells                                           Total Number                                   
+----------------------------------------------------------------------------------------------------
+ Level Shifter:                                     0                                             
+ Enable Level Shifter:                              0                                             
+ Isolation Cell:                                    0                                             
+ Retention Cell:                                    0                                             
+ Retention Clamp Cell:                              0                                             
+ Switch Cell:                                       0                                             
+ Always-On Cell:                                    0                                             
+ Repeater Cell:                                     0                                             
+
+----------------------------------------------------------------------------------------------------
+Unmapped MV Cells 
+----------------------------------------------------------------------------------------------------
+0 Isolation Cells are unmapped 
+0 Retention Clamp Cells are unmapped 
+----------------------------------------------------------------------------------------------------
+1
+# ... (report_area, report_timing, report_power,
+# report_constraint -all_violators, write -format verilog -hierarchy
+# — como na atividade anterior)
+# 4. LINKAR O DESIGN
+# O comando 'link' é necessário para resolver todas as referências
+# e preparar o design para a síntese
+# Pode ser suprimido para designs muito pequenoas, mas é recomendado para designs maiores
+# Não é uma boa prática retirar o comando
+link
+
+  Linking design 'Vending_Top'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  Vending_Top                 /home/valmir.silva/Vending_Machine_Controller/sim/Vending_Top.db
+  saed32rvt_tt1p05v25c (library) /home/valmir.silva/Vending_Machine_Controller/lib/saed32rvt_tt1p05v25c.db
+  * (5 designs)               /home/valmir.silva/Vending_Machine_Controller/sim/memory.db, etc
+  dw_foundation.sldb (library) /Tools/synopsys/syn/X-2025.06-SP2/libraries/syn/dw_foundation.sldb
+
+Information: Summary of messages issued during linking: (LINK-1806)
+No messages were issued during linking.
+1
+# 5. Gerar o arquivo de netlist não mapeado
+# (opcional, mas útil para depuração)
+write_file -format verilog -hier -out ../synth/synth.v
+Writing verilog file '/home/valmir.silva/Vending_Machine_Controller/synth/synth.v'.
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+Warning: Verilog writer has added 1 nets to module Vending_Top using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+1
+# 6. CARREGAR CONSTRAINTS
+read_sdc ../constraints/vending.sdc
+
+Reading SDC version 2.2...
+1
+# 7. SÍNTESE (compile_ultra é mais agressivo que compile)
+puts "\n============================================================"
+
+============================================================
+puts "INICIANDO SINTESE (Verilog)..."
+INICIANDO SINTESE (Verilog)...
+puts "============================================================"
+============================================================
+compile_ultra
+Information: Performing leakage power optimization. (PWR-850)
+CPU Load: 9%, Ram Free: 185 GB, Swap Free: 11 GB, Work Disk Free: 3532 GB, Tmp Disk Free: 83 GB
+Alib files are up-to-date.
+====================================================================================================
+| Flow Information                                                                                 |
+----------------------------------------------------------------------------------------------------
+| Flow         | Design Compiler WLM                                                               |
+| Command Line | compile_ultra                                                                     |
+====================================================================================================
+| Design Information                                      | Value                                  |
+====================================================================================================
+| Number of Scenarios                                     | 0                                      |
+| Leaf Cell Count                                         | 273                                    |
+| Number of User Hierarchies                              | 5                                      |
+| Sequential Cell Count                                   | 59                                     |
+| Macro Count                                             | 0                                      |
+| Pad Count                                               | 0                                      |
+| Number of Power Domains                                 | 0                                      |
+| Number of Path Groups                                   | 2                                      |
+| Number of VT Class                                      | 1                                      |
+| Number of Clocks                                        | 1                                      |
+| Number of Dont Touch Cells                              | 0                                      |
+| Number of Dont Touch Nets                               | 0                                      |
+| Number of Size Only Cells                               | 0                                      |
+| Design with Target Library Subset (with clock_path)     | false  (false )                        |
+| Design with UPF Data                                    | false                                  |
+====================================================================================================
+Information: Sequential output inversion is enabled.  SVF file must be used for formal verification. (OPT-1208)
+
+Information: There are 7 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+  Simplifying Design 'Vending_Top'
+
+Module: DW01_NAND2, Ports: 3, Input: 2, Output: 1, Inout: 0
+Module: DW01_NAND2, Registers: 0, Async set/reset: 0, Sync set/reset: 0
+  Building model 'DW01_NAND2'
+Information: Ungrouping hierarchy u_mem_unit before Pass 1 (OPT-776)
+Information: Added key list 'DesignWare' to design 'Vending_Top'. (DDB-72)
+Information: Ungrouping hierarchy u_credit_unit before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy u_comp_unit before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy u_sub_unit before Pass 1 (OPT-776)
+Information: Ungrouping hierarchy u_control_unit before Pass 1 (OPT-776)
+Information: Ungrouping 5 of 6 hierarchies before Pass 1 (OPT-775)
+CPU Load: 9%, Ram Free: 185 GB, Swap Free: 11 GB, Work Disk Free: 3532 GB, Tmp Disk Free: 83 GB
+Information: State dependent leakage is now switched from on to off.
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'Vending_Top'
+CPU Load: 9%, Ram Free: 185 GB, Swap Free: 11 GB, Work Disk Free: 3532 GB, Tmp Disk Free: 83 GB
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+Information: The library cell 'PMT3_RVT' in the library 'saed32rvt_tt1p05v25c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT2_RVT' in the library 'saed32rvt_tt1p05v25c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'PMT1_RVT' in the library 'saed32rvt_tt1p05v25c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT3_RVT' in the library 'saed32rvt_tt1p05v25c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT2_RVT' in the library 'saed32rvt_tt1p05v25c' is not characterized for internal power. (PWR-536)
+Information: The library cell 'NMT1_RVT' in the library 'saed32rvt_tt1p05v25c' is not characterized for internal power. (PWR-536)
+Information: The target library(s) contains cell(s), other than black boxes, that are not characterized for internal power. (PWR-24)
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Mapping Optimizations  (Ultra High effort)
+  -------------------------------
+Information: There is no timing violation in design Vending_Top. Delay-based auto_ungroup will not be performed. (OPT-780)
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:01     883.7      0.00       0.0       0.0                           98104648.0000
+    0:00:01     882.1      0.00       0.0       0.0                           98051464.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Constant Register Removal
+  -----------------------------------
+    0:00:01     882.1      0.00       0.0       0.0                           98051464.0000
+    0:00:01     882.1      0.00       0.0       0.0                           98051464.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Global Optimizations
+  ------------------------------
+  Numerical Synthesis (Phase 1)
+  Numerical Synthesis (Phase 2)
+  Global Optimization (Phase 31)
+  Global Optimization (Phase 32)
+  Global Optimization (Phase 33)
+  Global Optimization (Phase 34)
+  Global Optimization (Phase 35)
+  Global Optimization (Phase 36)
+  Global Optimization (Phase 37)
+  Global Optimization (Phase 38)
+  Global Optimization (Phase 39)
+  Global Optimization (Phase 40)
+  Global Optimization (Phase 41)
+  Global Optimization (Phase 42)
+  Global Optimization (Phase 43)
+  Global Optimization (Phase 44)
+  Global Optimization (Phase 45)
+  Global Optimization (Phase 46)
+  Global Optimization (Phase 47)
+  Global Optimization (Phase 48)
+  Global Optimization (Phase 49)
+  Global Optimization (Phase 50)
+  Global Optimization (Phase 51)
+  Global Optimization (Phase 52)
+  Global Optimization (Phase 53)
+  Global Optimization (Phase 54)
+  Global Optimization (Phase 55)
+  Global Optimization (Phase 56)
+  Global Optimization (Phase 57)
+  Global Optimization (Phase 58)
+  Global Optimization (Phase 59)
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Isolate Ports
+  -----------------------
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+  Beginning Delay Optimization
+  ----------------------------
+    0:00:02     853.7      0.00       0.0       0.0                           98169568.0000
+    0:00:02     853.7      0.00       0.0       0.0                           98169568.0000
+    0:00:02     853.7      0.00       0.0       0.0                           98169568.0000
+    0:00:02     859.5      0.00       0.0       0.0                           93939064.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+    0:00:02     858.8      0.00       0.0       0.0                           93970832.0000
+    0:00:02     858.8      0.00       0.0       0.0                           93970832.0000
+
+  Beginning WLM Backend Optimization
+  --------------------------------------
+    0:00:02     857.2      0.00       0.0       0.0                           93817952.0000
+    0:00:02     857.2      0.00       0.0       0.0                           93817952.0000
+    0:00:02     857.2      0.00       0.0       0.0                           93817952.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+
+Threshold voltage group cell usage:
+>> saed32cell_svt 100.00%
+
+
+  Beginning Leakage Power Optimization  (max_leakage_power 0)
+  ------------------------------------
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+  Global Optimization (Phase 60)
+  Global Optimization (Phase 61)
+  Global Optimization (Phase 62)
+  Global Optimization (Phase 63)
+  Global Optimization (Phase 64)
+  Global Optimization (Phase 65)
+  Global Optimization (Phase 66)
+  Global Optimization (Phase 67)
+  Global Optimization (Phase 68)
+  Global Optimization (Phase 69)
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+
+                                  TOTAL                                                
+   ELAPSED            WORST NEG   SETUP    DESIGN                              LEAKAGE 
+    TIME      AREA      SLACK     COST    RULE COST         ENDPOINT            POWER  
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+    0:00:02     857.2      0.00       0.0       0.0                           92551088.0000
+CPU Load: 9%, Ram Free: 185 GB, Swap Free: 11 GB, Work Disk Free: 3532 GB, Tmp Disk Free: 83 GB
+Loading db file '/home/valmir.silva/Vending_Machine_Controller/lib/saed32rvt_tt1p05v25c.db'
+
+
+Note: Symbol # after min delay cost means estimated hold TNS across all active scenarios 
+
+
+  Optimization Complete
+  ---------------------
+Information: State dependent leakage is now switched from off to on.
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+CPU Load: 9%, Ram Free: 185 GB, Swap Free: 11 GB, Work Disk Free: 3532 GB, Tmp Disk Free: 83 GB
+Information: Total number of MV cells in the design.
+----------------------------------------------------------------------------------------------------
+ MV Cells                                           Total Number                                   
+----------------------------------------------------------------------------------------------------
+ Level Shifter:                                     0                                             
+ Enable Level Shifter:                              0                                             
+ Isolation Cell:                                    0                                             
+ Retention Cell:                                    0                                             
+ Retention Clamp Cell:                              0                                             
+ Switch Cell:                                       0                                             
+ Always-On Cell:                                    0                                             
+ Repeater Cell:                                     0                                             
+
+----------------------------------------------------------------------------------------------------
+Unmapped MV Cells 
+----------------------------------------------------------------------------------------------------
+0 Isolation Cells are unmapped 
+0 Retention Clamp Cells are unmapped 
+----------------------------------------------------------------------------------------------------
+1
+# 8. RELATÓRIOS PÓS-SÍNTESE
+puts "\n============================================================"
+
+============================================================
+puts "RELATORIOS POS-SINTESE"
+RELATORIOS POS-SINTESE
+puts "============================================================"
+============================================================
+# Relatório de área
+report_area -hierarchy > ../reports/area_pos.rpt
+puts "\nArea Relatorio salvo em: area_pos.rpt"
+
+Area Relatorio salvo em: area_pos.rpt
+# Relatório de timing (setup)
+report_timing > ../reports/timing_relatorio.rpt
+puts "Timing Relatorio salvo em: timing_relatorio.rpt"
+Timing Relatorio salvo em: timing_relatorio.rpt
+# Relatório de power
+report_power > ../reports/power.rpt
+puts "Power Relatorio salvo em: power.rpt"
+Power Relatorio salvo em: power.rpt
+# Relatório de violações de setup
+report_constraint -all_violators -check_type setup > ../reports/setup_violations.rpt
+Error: Errors detected during redirect
+	Use error_info for more info. (CMD-013)
+puts "Setup Violations Relatorio salvo em: setup_violations.rpt"
+Setup Violations Relatorio salvo em: setup_violations.rpt
+# Relatório de violações de hold
+report_constraint -all_violators -check_type hold > ../reports/hold_violations.rpt
+Error: Errors detected during redirect
+	Use error_info for more info. (CMD-013)
+puts "Hold Violations Relatorio salvo em: hold_violations.rpt"
+Hold Violations Relatorio salvo em: hold_violations.rpt
+# 8. EXPORTAR NETLIST
+# Formato Verilog (para simulação)
+write -format verilog -hierarchy -output ../synth/impl.v
+Writing verilog file '/home/valmir.silva/Vending_Machine_Controller/synth/impl.v'.
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+1
+puts "\nNetlist SystemVerilog salvo em: porta_and_mapeada.sv"
+
+Netlist SystemVerilog salvo em: porta_and_mapeada.sv
+# Formato DDC (binário Synopsys, mais rápido para ICC2)
+write -format ddc -hierarchy -output ../synth/vending_mapeada.ddc
+Writing ddc file '../synth/vending_mapeada.ddc'.
+1
+puts "Netlist DDC salvo em: porta_and_mapeada.ddc"
+Netlist DDC salvo em: porta_and_mapeada.ddc
+# 9. SALVAR DESIGN EM MEMORY
+#save_designs -force physical_design/porta_and.db
+puts "Design Salvo em: Vending"
+Design Salvo em: Vending
+# 10. FINALIZAR
+puts "\n============================================================"
+
+============================================================
+puts "SINTESE CONCLUIDA COM SUCESSO (Verilog)!"
+SINTESE CONCLUIDA COM SUCESSO (Verilog)!
+puts "============================================================"
+============================================================
+puts "Arquivos gerados:"
+Arquivos gerados:
+puts "  - Vending.sv (netlist SystemVerilog)"
+  - Vending.sv (netlist SystemVerilog)
+puts "  - Vending.ddc (netlist DDC)"
+  - Vending.ddc (netlist DDC)
+puts "  - area_pos.rpt (area)"
+  - area_pos.rpt (area)
+puts "  - timing_relatorio.rpt (timing)"
+  - timing_relatorio.rpt (timing)
+puts "  - power.rpt (potencia)"
+  - power.rpt (potencia)
+puts "============================================================"
+============================================================
+exit
+
+Memory usage for this session 235 Mbytes.
+Memory usage for this session including child processes 235 Mbytes.
+CPU usage for this session 13 seconds ( 0.00 hours ).
+Elapsed time for this session 15 seconds ( 0.00 hours ).
+
+Thank you...

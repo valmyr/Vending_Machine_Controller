@@ -4,7 +4,7 @@ Report : power
         -analysis_effort low
 Design : Vending_Top
 Version: X-2025.06-SP2
-Date   : Mon Jun 29 01:18:40 2026
+Date   : Fri Jul 17 18:37:46 2026
 ****************************************
 
 
@@ -35,25 +35,24 @@ Attributes
 i - Including register clock pin internal power
 
 
-  Cell Internal Power  =  46.0707 uW   (76%)
-  Net Switching Power  =  14.8987 uW   (24%)
+  Cell Internal Power  =  25.5863 uW   (97%)
+  Net Switching Power  = 898.6393 nW    (3%)
                          ---------
-Total Dynamic Power    =  60.9694 uW  (100%)
+Total Dynamic Power    =  26.4849 uW  (100%)
 
-Cell Leakage Power     =  85.8283 uW
+Cell Leakage Power     =  86.7570 uW
 
-Information: report_power power group summary does not include estimated clock tree power. (PWR-789)
 
                  Internal         Switching           Leakage            Total
 Power Group      Power            Power               Power              Power   (   %    )  Attrs
 --------------------------------------------------------------------------------------------------
 io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
-black_box          0.0000            3.2363            0.0000            3.2363  (   2.20%)
-clock_network      0.0000            0.0000            0.0000            0.0000  (   0.00%)  i
-register           0.0000            0.0000            0.0000            0.0000  (   0.00%)
-sequential        23.4216            0.1984        5.8008e+07           81.6282  (  55.61%)
-combinational     22.6490           11.4640        2.7820e+07           61.9332  (  42.19%)
+black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
+clock_network     24.0349            0.0000            0.0000           24.0349  (  21.22%)  i
+register           0.4634            0.2392        5.8702e+07           59.4047  (  52.46%)
+sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
+combinational      1.0880            0.6594        2.8055e+07           29.8023  (  26.32%)
 --------------------------------------------------------------------------------------------------
-Total             46.0707 uW        14.8987 uW     8.5828e+07 pW       146.7977 uW
+Total             25.5863 uW         0.8986 uW     8.6757e+07 pW       113.2419 uW
 1

@@ -6,15 +6,17 @@ Report : timing
         -max_paths 1
 Design : Vending_Top
 Version: X-2025.06-SP2
-Date   : Mon Jun 29 01:18:40 2026
+Date   : Fri Jul 17 18:37:46 2026
 ****************************************
 
 Operating Conditions: tt1p05v25c   Library: saed32rvt_tt1p05v25c
 Wire Load Model Mode: enclosed
 
-  Startpoint: u_control_unit/dispense (internal pin)
-  Endpoint: dispense (output port)
-  Path Group: (none)
+  Startpoint: u_mem_unit/price_reg[0]
+              (rising edge-triggered flip-flop clocked by sys_clk)
+  Endpoint: change_out[7]
+            (output port clocked by sys_clk)
+  Path Group: sys_clk
   Path Type: max
 
   Des/Clust/Port     Wire Load Model       Library
@@ -23,11 +25,33 @@ Wire Load Model Mode: enclosed
 
   Point                                                   Incr       Path
   --------------------------------------------------------------------------
-  u_control_unit/dispense (control_vending_machine)       0.00       0.00 r
-  dispense (out)                                          0.00       0.00 r
-  data arrival time                                                  0.00
+  clock sys_clk (rise edge)                               0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  u_mem_unit/price_reg[0]/CLK (DFFSSRX1_RVT)              0.00       0.00 r
+  u_mem_unit/price_reg[0]/Q (DFFSSRX1_RVT)                0.09       0.09 f
+  U281/Y (NAND2X0_RVT)                                    0.04       0.13 r
+  U282/Y (INVX0_RVT)                                      0.04       0.18 f
+  U283/Y (OA222X1_RVT)                                    0.09       0.26 f
+  U284/Y (OA222X1_RVT)                                    0.08       0.35 f
+  U285/Y (OA222X1_RVT)                                    0.08       0.43 f
+  U286/Y (OA222X1_RVT)                                    0.08       0.52 f
+  U287/Y (OA222X1_RVT)                                    0.08       0.60 f
+  U288/Y (OA222X1_RVT)                                    0.08       0.68 f
+  U290/Y (OA221X1_RVT)                                    0.07       0.75 f
+  U291/Y (OA221X1_RVT)                                    0.05       0.80 f
+  change_out[7] (out)                                     0.00       0.80 f
+  data arrival time                                                  0.80
+
+  clock sys_clk (rise edge)                              20.00      20.00
+  clock network delay (ideal)                             0.00      20.00
+  clock uncertainty                                      -0.50      19.50
+  output external delay                                  -3.00      16.50
+  data required time                                                16.50
   --------------------------------------------------------------------------
-  (Path is unconstrained)
+  data required time                                                16.50
+  data arrival time                                                 -0.80
+  --------------------------------------------------------------------------
+  slack (MET)                                                       15.70
 
 
 1

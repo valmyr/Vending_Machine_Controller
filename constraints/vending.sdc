@@ -1,3 +1,8 @@
+#Vending.sdc - Restrições de temporização pata o design Vending Machine Controller
+#Autores: Valmir F. Silva, Marcos A. I Luz
+#Data: 17/07/2026
+
+#==============================================================================
 #Definição do Clock
 #==============================================================================
 create_clock -name sys_clk -period 20.0 [get_ports clk]
@@ -15,5 +20,5 @@ set_input_delay -clock sys_clk -max 3.0 [all_inputs]
 
 #Restrições de Saída
 #==============================================================================
-set_input_delay -clock sys_clk -max 3.0 [all_inputs]
+set_output_delay -clock sys_clk -max 3.0 [all_outputs]
 #==============================================================================

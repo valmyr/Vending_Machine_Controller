@@ -1,0 +1,10 @@
+Directory = /home/valmir.silva/Vending_Machine_Controller
+Total     = 3725 GB
+Available = 3533 GB
+Used      = 192 GB (6%)
+
+Directory = /tmp
+Total     = 100 GB
+Available = 84 GB
+Used      = 16 GB (16%)
+

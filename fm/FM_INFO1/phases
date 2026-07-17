@@ -1,0 +1,18 @@
+Phase: set_top - reference
+  Begin   : Fri Jul 17 18:00:27 2026
+  End     : Fri Jul 17 18:00:27 2026
+  Duration: 0.00 hours
+  Memory  : 2.6 -> 2.6 GB (2.6 GB max, 176.9 GB free)
+
+Phase: set_top - reference
+  Begin   : Fri Jul 17 18:00:54 2026
+  End     : Fri Jul 17 18:00:54 2026
+  Duration: 0.00 hours
+  Memory  : 2.4 -> 2.4 GB (2.6 GB max, 176.6 GB free)
+
+Phase: set_top - reference
+  Begin   : Fri Jul 17 18:01:13 2026
+  End     : Fri Jul 17 18:01:13 2026
+  Duration: 0.00 hours
+  Memory  : 2.6 -> 2.6 GB (2.6 GB max, 176.8 GB free)
+

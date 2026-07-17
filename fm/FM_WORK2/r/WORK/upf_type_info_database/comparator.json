@@ -1,0 +1,66 @@
+{
+    "Version": "X-2025.06-SP3",
+    "Module": "comparator",
+    "Source File": "/home/valmir.silva/Vending_Machine_Controller/rtl/comparator.sv",
+    "Start Line": 1,
+    "End Line": 8,
+    "Ports": [
+        {
+            "PortName": "credit",
+            "Direction": "input",
+            "Bits": [
+                "credit[7]",
+                "credit[6]",
+                "credit[5]",
+                "credit[4]",
+                "credit[3]",
+                "credit[2]",
+                "credit[1]",
+                "credit[0]"
+            ]
+        },
+        {
+            "PortName": "price",
+            "Direction": "input",
+            "Bits": [
+                "price[7]",
+                "price[6]",
+                "price[5]",
+                "price[4]",
+                "price[3]",
+                "price[2]",
+                "price[1]",
+                "price[0]"
+            ]
+        },
+        {
+            "PortName": "stock",
+            "Direction": "input",
+            "Bits": [
+                "stock[7]",
+                "stock[6]",
+                "stock[5]",
+                "stock[4]",
+                "stock[3]",
+                "stock[2]",
+                "stock[1]",
+                "stock[0]"
+            ]
+        },
+        {
+            "PortName": "can_sell",
+            "Direction": "output",
+            "Bits": [
+                "can_sell[7]",
+                "can_sell[6]",
+                "can_sell[5]",
+                "can_sell[4]",
+                "can_sell[3]",
+                "can_sell[2]",
+                "can_sell[1]",
+                "can_sell[0]"
+            ]
+        }
+    ],
+    "Cells": []
+}

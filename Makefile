@@ -3,7 +3,7 @@ SIM_DIR=sim
 #Arquivos
 RTL_FILES=../list_file_dut.lst
 TB_FILES=../list_file_tb.lst
-WAVE_CONFIG =
+#WAVE_CONFIG =
 #Top do testbench
 TOP=tb
 
@@ -22,7 +22,7 @@ syntax:init
 		 +lint=all			    \
 		 -timescale=1ns/1ps		\
 		 -f $(RTL_FILES)		\
-		-f $(TB_FILES)		
+		 -f $(TB_FILES)		
 
 syntax_pos_impl:
 	cd $(SIM_DIR)				&& \
