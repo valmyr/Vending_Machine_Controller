@@ -13,7 +13,7 @@ module control_unit(
     output logic       mem_read,
     output logic       clr,
 
-    output logic [3:0] state_out,
+    output logic [2:0] state_out,
     output logic       dispense,
     output logic       error
 );
