@@ -1,0 +1,102 @@
+Magic 271485
+Revision Verdi_X-2025.06-SP2
+
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 11 2788 595 126 135
+
+; File list:
+; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
+openDirFile -d / "" "/home/marcos.luz/Projetos/Vending_Machine_Controller/sim/waves.fsdb"
+
+; file time scale:
+; fileTimeScale ### s|ms|us|ns|ps
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+; waveform viewport range
+zoom 0.000000 359263.488438
+cursor 275000.000000
+marker 0.000000
+
+; user define markers
+; userMarker time_pos marker_name color linestyle
+userMarker 535181.177 M9 ID_GREEN5 long_dashed
+userMarker 475000 M8 ID_GREEN5 long_dashed
+userMarker 415000 M7 ID_GREEN5 long_dashed
+userMarker 355049.463 M6 ID_GREEN5 long_dashed
+userMarker 295000 M5 ID_GREEN5 long_dashed
+userMarker 234842.614 M4 ID_GREEN5 long_dashed
+userMarker 165026.321 M3 ID_GREEN5 long_dashed
+userMarker 135222.953 M2 ID_GREEN5 long_dashed
+userMarker 74977.335 M1 ID_GREEN5 long_dashed
+
+; visible top row signal index
+top 0
+; marker line index
+markerPos 2
+
+; event list
+; addEvent event_name event_expression
+; curEvent event_name
+
+
+
+COMPLEX_EVENT_BEGIN
+
+
+COMPLEX_EVENT_END
+
+
+
+; toolbar current search type
+; curSTATUS search_type
+curSTATUS ByChange
+
+
+addGroup "G1"
+activeDirFile "" "/home/marcos.luz/Projetos/Vending_Machine_Controller/sim/waves.fsdb"
+addSignal -h 15 /tb/clk
+addSignal -h 15 -holdScope rst
+addSignal -c ID_ORANGE6 -ls solid -lw 1 -h 15 -UNSIGNED -holdScope state_out[2:0]
+addSubGroup "Input"
+addSignal -h 15 -UNSIGNED -HEX /tb/coin_in[1:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope sel_item[1:0]
+addSignal -c ID_PURPLE5 -ls solid -lw 1 -h 15 -holdScope confirm
+addSignal -h 15 -holdScope cancel
+endSubGroup "Input"
+addSubGroup "Credit/Stock"
+addSignal -h 15 /tb/vending_top/can_sell
+addSignal -h 15 -UNSIGNED -UDEC -holdScope credit[7:0]
+addSignal -h 15 -holdScope credit_load
+addSignal -h 15 -UNSIGNED -UDEC -holdScope price[7:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope stock[7:0]
+endSubGroup "Credit/Stock"
+addSubGroup "Output"
+addSignal -c ID_YELLOW5 -ls solid -lw 1 -h 15 -UNSIGNED -UDEC /tb/change_out[7:0]
+addSignal -c ID_GREEN6 -ls solid -lw 1 -h 15 -holdScope dispense
+addSignal -h 15 -UNSIGNED -UDEC -holdScope display[7:0]
+addSignal -c ID_RED5 -ls solid -lw 1 -h 15 -holdScope error
+endSubGroup "Output"
+addGroup "G2"
+
+; getSignalForm Scope Hierarchy Status
+; active file of getSignalForm
+activeDirFile "" "/home/marcos.luz/Projetos/Vending_Machine_Controller/sim/waves.fsdb"
+
+GETSIGNALFORM_SCOPE_HIERARCHY_BEGIN
+getSignalForm close
+
+"/Vending_Machine_pkg"
+"/tb"
+
+SCOPE_LIST_BEGIN
+"/Vending_Machine_pkg"
+"/tb"
+"/tb/vending_top"
+SCOPE_LIST_END
+
+GETSIGNALFORM_SCOPE_HIERARCHY_END
+
+

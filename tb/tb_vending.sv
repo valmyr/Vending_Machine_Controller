@@ -48,7 +48,7 @@ module tb;
 
     task confirm_purchase;
         confirm = 1'b1;
-        #(PERIOD);
+        #(0.5*PERIOD);
         confirm = 0;
     endtask
 
@@ -124,6 +124,7 @@ module tb;
 
         reset_machine();
 
+        // Caso 4
         repeat(6) begin
             buy_item(
                 .item(2'b00), 
