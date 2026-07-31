@@ -1,0 +1,99 @@
+{
+    "Version": "X-2025.06-SP3",
+    "Module": "credit_reg",
+    "Source File": "/home/valmir.silva/Vending_Machine_Controller/rtl/credit_reg.sv",
+    "Start Line": 1,
+    "End Line": 29,
+    "Ports": [
+        {
+            "PortName": "clk",
+            "Direction": "input"
+        },
+        {
+            "PortName": "rst",
+            "Direction": "input"
+        },
+        {
+            "PortName": "clr",
+            "Direction": "input"
+        },
+        {
+            "PortName": "credit_load",
+            "Direction": "input"
+        },
+        {
+            "PortName": "coin_value",
+            "Direction": "input",
+            "Bits": [
+                "coin_value[1]",
+                "coin_value[0]"
+            ]
+        },
+        {
+            "PortName": "credit",
+            "Direction": "output",
+            "Bits": [
+                "credit[7]",
+                "credit[6]",
+                "credit[5]",
+                "credit[4]",
+                "credit[3]",
+                "credit[2]",
+                "credit[1]",
+                "credit[0]"
+            ]
+        }
+    ],
+    "Cells": [
+        {
+            "CellName": "mem",
+            "Bits": [
+                "mem_reg[0][0]",
+                "mem_reg[0][1]",
+                "mem_reg[0][2]",
+                "mem_reg[0][3]",
+                "mem_reg[0][4]",
+                "mem_reg[0][5]",
+                "mem_reg[0][6]",
+                "mem_reg[0][7]",
+                "mem_reg[1][0]",
+                "mem_reg[1][1]",
+                "mem_reg[1][2]",
+                "mem_reg[1][3]",
+                "mem_reg[1][4]",
+                "mem_reg[1][5]",
+                "mem_reg[1][6]",
+                "mem_reg[1][7]",
+                "mem_reg[2][0]",
+                "mem_reg[2][1]",
+                "mem_reg[2][2]",
+                "mem_reg[2][3]",
+                "mem_reg[2][4]",
+                "mem_reg[2][5]",
+                "mem_reg[2][6]",
+                "mem_reg[2][7]",
+                "mem_reg[3][0]",
+                "mem_reg[3][1]",
+                "mem_reg[3][2]",
+                "mem_reg[3][3]",
+                "mem_reg[3][4]",
+                "mem_reg[3][5]",
+                "mem_reg[3][6]",
+                "mem_reg[3][7]"
+            ]
+        },
+        {
+            "CellName": "credit",
+            "Bits": [
+                "credit_reg[0]",
+                "credit_reg[1]",
+                "credit_reg[2]",
+                "credit_reg[3]",
+                "credit_reg[4]",
+                "credit_reg[5]",
+                "credit_reg[6]",
+                "credit_reg[7]"
+            ]
+        }
+    ]
+}

@@ -8,14 +8,16 @@ read_db ../lib/saed32rvt_tt1p05v25c.db
 # Deve vir ANTES de qualquer read_verilog/set_top: o Formality lê
 # o histórico de otimizações da síntese e passa a registrar também
 # as próprias operações desta sessão no mesmo arquivo.
-set_svf ./reports/default.svf
+
+
+set synopsys_auto_setup true
 # 3. ESSENCIAL: habilita o modo de setup automático baseado no SVF.
 # Sem esta variável, o Formality só aproveita o guidance
 # parcialmente (limitado a poucas operações estruturais) — é ela
 # que faz o Formality de fato consumir o histórico de otimizações
 # do Design Compiler (constantes, retiming, merge/inversão de
 # registrador, reencodificação de FSM) durante o match.
-set synopsys_auto_setup true
+set_svf ./reports/default.svf
 
 # 4. Design de referência (golden) — RTL pré-síntese
 
@@ -50,4 +52,3 @@ report_status -verbose > reports/formality_status.rpt
 report_passing_points > reports/formality_passing.rpt
 report_failing_points > reports/formality_failing.rpt
 report_unmatched_points > reports/formality_unmatched.rpt
-exit

@@ -1,0 +1,94 @@
+{
+    "Version": "X-2025.06-SP3",
+    "Module": "Vending_Top",
+    "Source File": "/home/valmir.silva/Vending_Machine_Controller/rtl/vending_top.sv",
+    "Start Line": 1,
+    "End Line": 123,
+    "Ports": [
+        {
+            "PortName": "clk",
+            "Direction": "input"
+        },
+        {
+            "PortName": "rst",
+            "Direction": "input"
+        },
+        {
+            "PortName": "sel_item",
+            "Direction": "input",
+            "Bits": [
+                "sel_item[1]",
+                "sel_item[0]"
+            ]
+        },
+        {
+            "PortName": "coin_in",
+            "Direction": "input",
+            "Bits": [
+                "coin_in[1]",
+                "coin_in[0]"
+            ]
+        },
+        {
+            "PortName": "confirm",
+            "Direction": "input"
+        },
+        {
+            "PortName": "cancel",
+            "Direction": "input"
+        },
+        {
+            "PortName": "change_out",
+            "Direction": "output",
+            "Bits": [
+                "change_out[7]",
+                "change_out[6]",
+                "change_out[5]",
+                "change_out[4]",
+                "change_out[3]",
+                "change_out[2]",
+                "change_out[1]",
+                "change_out[0]"
+            ]
+        },
+        {
+            "PortName": "state_out",
+            "Direction": "output",
+            "Bits": [
+                "state_out[2]",
+                "state_out[1]",
+                "state_out[0]"
+            ]
+        },
+        {
+            "PortName": "dispense",
+            "Direction": "output"
+        },
+        {
+            "PortName": "display",
+            "Direction": "output",
+            "Bits": [
+                "display[7]",
+                "display[6]",
+                "display[5]",
+                "display[4]",
+                "display[3]",
+                "display[2]",
+                "display[1]",
+                "display[0]"
+            ]
+        },
+        {
+            "PortName": "error",
+            "Direction": "output"
+        }
+    ],
+    "Cells": [
+        {
+            "CellName": "cancel_reg",
+            "Bits": [
+                "cancel_reg_reg"
+            ]
+        }
+    ]
+}

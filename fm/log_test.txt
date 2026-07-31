@@ -1,0 +1,244 @@
+
+                                 Formality (R)
+
+               Version X-2025.06-SP3 for linux64 - Oct 13, 2025 
+
+                    Copyright (c) 1988 - 2025 Synopsys, Inc.
+   This software and the associated documentation are proprietary to Synopsys,
+ Inc. This software may only be used in accordance with the terms and conditions
+ of a written license agreement with Synopsys, Inc. All other use, reproduction,
+   or distribution of this software is strictly prohibited.  Licensed Products
+     communicate with Synopsys servers for the purpose of providing software
+    updates, detecting software piracy and verifying that customers are using
+    Licensed Products in conformity with the applicable License Key for such
+  Licensed Products. Synopsys will use information gathered in connection with
+    this process to deliver software updates and pursue software pirates and
+                                   infringers.
+
+ Inclusivity & Diversity - Visit SolvNetPlus to read the "Synopsys Statement on
+            Inclusivity and Diversity" (Refer to article 000036315 at
+                        https://solvnetplus.synopsys.com)
+
+Build: 10190302
+Hostname: srv-microeletronica3
+Current time: Fri Jul 17 20:13:50 2026
+
+Loading db file '/Tools/synopsys/fm/X-2025.06-SP3/libraries/syn/gtech.db'
+
+Script: formality.tcl
+
+Information: Term was not able to be set up using xterm-256color . Using "xterm" by default instead. (CLE-10)
+# ============================================================
+# formality.tcl — Equivalência RTL (golden) x Netlist (revision)
+# Controlador de Vending Machine — com guidance de SVF
+# ============================================================
+# 1. Biblioteca de células — a mesma target_library do synth.tcl
+read_db ../lib/saed32rvt_tt1p05v25c.db
+Loading db file '/home/valmir.silva/Vending_Machine_Controller/lib/saed32rvt_tt1p05v25c.db'
+1
+# 2. Carrega o SVF gerado pelo Design Compiler (Etapa 1) como guidance.
+# Deve vir ANTES de qualquer read_verilog/set_top: o Formality lê
+# o histórico de otimizações da síntese e passa a registrar também
+# as próprias operações desta sessão no mesmo arquivo.
+set synopsys_auto_setup true
+true
+# 3. ESSENCIAL: habilita o modo de setup automático baseado no SVF.
+# Sem esta variável, o Formality só aproveita o guidance
+# parcialmente (limitado a poucas operações estruturais) — é ela
+# que faz o Formality de fato consumir o histórico de otimizações
+# do Design Compiler (constantes, retiming, merge/inversão de
+# registrador, reencodificação de FSM) durante o match.
+set_svf ./reports/default.svf
+Error: Cannot open file: ./reports/default.svf (FM-203)
+0
+# 4. Design de referência (golden) — RTL pré-síntese
+# LER O ARQUIVO RTL (SYSTEMVERILOG)
+#============================================================
+set FILE_LIST [open "../list_file_dut.lst" r]
+file11
+set SV_FILES [split [string trim [read $FILE_LIST]] "\n"]
+../rtl/vending_pkg.sv ../rtl/comparator.sv ../rtl/control_unit.sv ../rtl/credit_reg.sv ../rtl/memory.sv ../rtl/subtractor.sv ../rtl/vending_top.sv
+close $FILE_LIST
+#============================================================
+read_sverilog -r $SV_FILES
+No target library specified, default is WORK
+Loading verilog file '/home/valmir.silva/Vending_Machine_Controller/rtl/vending_pkg.sv'
+Loading verilog file '/home/valmir.silva/Vending_Machine_Controller/rtl/comparator.sv'
+Loading verilog file '/home/valmir.silva/Vending_Machine_Controller/rtl/control_unit.sv'
+Loading verilog file '/home/valmir.silva/Vending_Machine_Controller/rtl/credit_reg.sv'
+Loading verilog file '/home/valmir.silva/Vending_Machine_Controller/rtl/memory.sv'
+Loading verilog file '/home/valmir.silva/Vending_Machine_Controller/rtl/subtractor.sv'
+Loading verilog file '/home/valmir.silva/Vending_Machine_Controller/rtl/vending_top.sv'
+Warning: Redeclaration of port 'sel_item'. (File: /home/valmir.silva/Vending_Machine_Controller/rtl/vending_top.sv Line: 6)  (FMR_VLOG-051)
+Current container set to 'r'
+1
+set_top r:/WORK/Vending_Top
+Setting top design to 'r:/WORK/Vending_Top'
+Status:   Elaborating design Vending_Top   ...  
+Status:   Elaborating design memory   ...  
+Status:   Elaborating design credit_reg   ...  
+Status:   Elaborating design comparator   ...  
+Status:   Elaborating design subtractor   ...  
+Status:   Elaborating design control_unit   ...  
+Status:  Implementing inferred operators...
+
+************ Library Checking Summary ************
+Warning:  8 unlinked power cell(s) with unread pg pins.
+Warning:  1 unlinked power cell(s) with unread save/restore retention signals.
+Warning:  72 unlinked power cell(s) with no power down function on an ff or latch.
+        Use 'report_libraries -defects all' for more details.
+**************************************************
+
+Top design successfully set to 'r:/WORK/Vending_Top'
+Reference design set to 'r:/WORK/Vending_Top'
+1
+# 5. Design revisado — netlist gerada pelo Design Compiler
+read_verilog -i ../synth/impl.v
+No target library specified, default is WORK
+Loading verilog file '/home/valmir.silva/Vending_Machine_Controller/synth/impl.v'
+Current container set to 'i'
+1
+set_top i:/WORK/Vending_Top
+Setting top design to 'i:/WORK/Vending_Top'
+Status:  Implementing inferred operators...
+
+************ Library Checking Summary ************
+Warning:  8 unlinked power cell(s) with unread pg pins.
+Warning:  1 unlinked power cell(s) with unread save/restore retention signals.
+Warning:  72 unlinked power cell(s) with no power down function on an ff or latch.
+        Use 'report_libraries -defects all' for more details.
+**************************************************
+
+Top design successfully set to 'i:/WORK/Vending_Top'
+Implementation design set to 'i:/WORK/Vending_Top'
+1
+# 6. Casamento de pontos entre golden e revised, usando o guidance do SVF
+match
+Reference design is 'r:/WORK/Vending_Top'
+Implementation design is 'i:/WORK/Vending_Top'
+Status:  Checking designs...
+Status:  Building verification models...
+Status:  Matching...
+    
+*********************************** Matching Results ***********************************    
+ 80 Compare points matched by name    
+ 0 Compare points matched by signature analysis    
+ 0 Compare points matched by topology    
+ 8 Matched primary inputs, black-box outputs    
+ 65(0) Unmatched reference(implementation) compare points    
+ 0(0) Unmatched reference(implementation) primary inputs, black-box outputs    
+----------------------------------------------------------------------------------------    
+Unmatched Objects                                                        REF        IMPL    
+----------------------------------------------------------------------------------------    
+ Registers                                                                65           0    
+   Constrained 0X                                                         43           0    
+   Constrained 1X                                                         22           0    
+****************************************************************************************
+
+1
+# Verifica quais operações do SVF foram usadas com sucesso como guidance
+# e quais foram rejeitadas (precisam de investigação manual)
+report_svf_operation -status accepted > reports/formality_svf_accepted.rpt
+report_svf_operation -status rejected > reports/formality_svf_rejected.rpt
+# Inspecione o resultado do casamento antes de seguir para verify
+report_matched_points > reports/formality_matched.rpt
+report_unmatched_points > reports/formality_unmatched.rpt
+# 7. Prova de equivalência ponto a ponto
+verify
+Reference design is 'r:/WORK/Vending_Top'
+Implementation design is 'i:/WORK/Vending_Top'
+    
+*********************************** Matching Results ***********************************    
+ 80 Compare points matched by name    
+ 0 Compare points matched by signature analysis    
+ 0 Compare points matched by topology    
+ 8 Matched primary inputs, black-box outputs    
+ 65(0) Unmatched reference(implementation) compare points    
+ 0(0) Unmatched reference(implementation) primary inputs, black-box outputs    
+----------------------------------------------------------------------------------------    
+Unmatched Objects                                                        REF        IMPL    
+----------------------------------------------------------------------------------------    
+ Registers                                                                65           0    
+   Constrained 0X                                                         43           0    
+   Constrained 1X                                                         22           0    
+****************************************************************************************
+
+Status:  Verifying...
+    Compare point u_control_unit/state_reg[0] failed (is not equivalent)
+    Compare point u_control_unit/state_reg[1] failed (is not equivalent)
+    Compare point u_control_unit/state_reg[2] failed (is not equivalent)
+    Compare point u_credit_unit/credit_reg[0] failed (is not equivalent)
+    Compare point u_credit_unit/credit_reg[1] failed (is not equivalent)
+    Compare point u_credit_unit/credit_reg[2] failed (is not equivalent)
+    Compare point u_credit_unit/credit_reg[3] failed (is not equivalent)
+    Compare point u_credit_unit/credit_reg[4] failed (is not equivalent)
+    Compare point u_credit_unit/credit_reg[5] failed (is not equivalent)
+    Compare point u_credit_unit/credit_reg[6] failed (is not equivalent)
+    Compare point u_credit_unit/credit_reg[7] failed (is not equivalent)
+    Compare point u_mem_unit/memory_array_reg[0][2] failed (is not equivalent)
+    Compare point u_mem_unit/memory_array_reg[1][0] failed (is not equivalent)
+    Compare point u_mem_unit/memory_array_reg[1][3] failed (is not equivalent)
+    Compare point u_mem_unit/memory_array_reg[1][4] failed (is not equivalent)
+    Compare point u_mem_unit/memory_array_reg[1][5] failed (is not equivalent)
+    Compare point u_mem_unit/memory_array_reg[1][6] failed (is not equivalent)
+    Compare point u_mem_unit/memory_array_reg[2][0] failed (is not equivalent)
+    Compare point u_mem_unit/memory_array_reg[3][0] failed (is not equivalent)
+    Compare point u_mem_unit/memory_array_reg[3][1] failed (is not equivalent)
+
+***************************** Synopsys Auto Setup Summary ******************************
+
+!!! Synopsys Auto Setup Mode was enabled. !!!
+!!! Verification results are valid assuming the following setup constraints: !!!
+
+### RTL Interpretation Setup
+   set hdlin_ignore_parallel_case false
+   set hdlin_ignore_full_case false
+   set hdlin_error_on_mismatch_message false
+   set hdlin_ignore_embedded_configuration true
+
+### Undriven Signal Handling Setup
+   set verification_set_undriven_signals synthesis
+
+### Test Logic Setup
+   set verification_verify_directly_undriven_output false
+   For details see report_dont_verify_points and report_constants
+
+For further details on Synopsys Auto Setup Mode: Type man synopsys_auto_setup
+****************************************************************************************
+
+
+********************************* Verification Results *********************************
+Verification FAILED
+   ATTENTION: synopsys_auto_setup mode was enabled.
+              See Synopsys Auto Setup Summary for details.
+----------------------------------------------------------
+ Reference design: r:/WORK/Vending_Top
+ Implementation design: i:/WORK/Vending_Top
+ 10 Passing compare points
+ 20 Failing compare points (20 matched, 0 unmatched)
+ 0 Aborted compare points
+ 50 Unverified compare points
+----------------------------------------------------------------------------------------
+Matched Compare Points     BBPin    Loop   BBNet     Cut    Port     DFF     LAT   TOTAL
+----------------------------------------------------------------------------------------
+Passing (equivalent)           0       0       0       0       9       1       0      10
+Failing (not equivalent)       0       0       0       0       0      20       0      20
+Unverified                     0       0       0       0      12      38       0      50
+****************************************************************************************
+Info:  Try the analyze_points command to see if Formality can determine potential
+causes, or suggest next steps for a FAILED or INCONCLUSIVE verification.
+See the man page for analyze_points usage and options.
+0
+# 8. Relatórios de sign-off
+report_status -verbose > reports/formality_status.rpt
+Error: Errors detected during redirect
+	Use error_info for more info. (CMD-013)
+Information: script 'formality.tcl'
+	stopped at line 51 due to error. (CMD-081)
+Extended error info:
+Errors detected during redirect
+    while executing
+"report_status -verbose > reports/formality_status.rpt"
+    (file "formality.tcl" line 51)
+ -- End Extended Error Info
+fm_shell (verify)> 

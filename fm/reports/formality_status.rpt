@@ -1,1 +1,26 @@
-Error: unknown option '-verbose' (CMD-010)
+**************************************************
+Report         : status
+                 -short 
+
+Reference      : r:/WORK/Vending_Top
+Implementation : i:/WORK/Vending_Top
+Version        : X-2025.06-SP3
+Date           : Fri Jul 24 19:35:21 2026
+**************************************************
+
+Reference Design:      r:/WORK/Vending_Top
+Implementation Design: i:/WORK/Vending_Top
+Verification
+   Status:             SUCCEEDED
+   Passing Points:     80
+   Failing Points:     0
+   Aborted Points:     0
+   Unverified Points:  0
+Diagnosis
+   Status:             Not Run
+   Error Candidates:   0
+User Defined Setup
+   Equivalences:       0
+   Compare Points:     0
+   Constants:          0
+1
