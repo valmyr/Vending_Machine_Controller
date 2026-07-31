@@ -89,3 +89,48 @@ clean:
 			 ./default.svf			\
 			 ./filenames.log		
 			 *
+#Passo Extra: Ajuda
+help:
+	@echo "======================================================================"
+	@echo " Makefile - Fluxo de Verificação/Síntese"
+	@echo "======================================================================"
+	@echo ""
+	@echo " Uso: make <target>"
+	@echo ""
+	@echo " --- Setup ---"
+	@echo "  init                  Cria o diretório de simulação ($(SIM_DIR))"
+	@echo ""
+	@echo " --- Passo 1: Verificação de Sintaxe (vlogan) ---"
+	@echo "  syntax                Analisa RTL + TB (pré-implementação)"
+	@echo "  syntax_pos_impl       Analisa PKG/LIB/RTL_IMPL + TB (pós-implementação)"
+	@echo ""
+	@echo " --- Síntese ---"
+	@echo "  synthesis             Executa dc_shell com synth/synth.tcl"
+	@echo ""
+	@echo " --- Passo 2: Compilação/Elaboração (vcs) ---"
+	@echo "  compile               Compila após 'syntax'"
+	@echo "  compile_pos_synth     Compila após 'syntax_pos_synth'"
+	@echo "  compile_pos_impl      Compila após 'syntax_pos_impl'"
+	@echo ""
+	@echo " --- Passo 3: Simulação ---"
+	@echo "  run                   Compila e roda a simulação (./simv)"
+	@echo "  run_gui               Compila e roda a simulação em modo GUI"
+	@echo "  run_pos_impl          Compila (pos_impl) e roda a simulação"
+	@echo "  run_gui_pos_impl      Compila (pos_impl) e roda em modo GUI"
+	@echo ""
+	@echo " --- Passo 4: Waveform ---"
+	@echo "  waves                 Roda a simulação e abre o Verdi"
+	@echo ""
+	@echo " --- Passo 5: Formality ---"
+	@echo "  formality             Roda síntese e depois fm_shell (formality.tcl)"
+	@echo ""
+	@echo " --- Limpeza ---"
+	@echo "  clean                 Remove arquivos gerados (sim, reports, synth, work, etc.)"
+	@echo ""
+	@echo " --- Ajuda ---"
+	@echo "  help                  Mostra esta mensagem"
+	@echo "======================================================================"
+
+.PHONY: help init syntax syntax_pos_impl synthesis compile compile_pos_synth \
+        compile_pos_impl run run_gui run_pos_impl run_gui_pos_impl waves \
+        formality clean
