@@ -1,6 +1,10 @@
 file_gen.sh
 sim/*
 lib/*
+FM_INFO
+fm/FM_INFO*
+fm/FM_WORK*
+fm/*_svf
 !lib/empty.txt
 !sim/tb_vending_machine.rc
 synth/vending_mapeada.ddc
