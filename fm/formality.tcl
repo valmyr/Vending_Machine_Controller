@@ -17,7 +17,7 @@ set synopsys_auto_setup true
 # que faz o Formality de fato consumir o histórico de otimizações
 # do Design Compiler (constantes, retiming, merge/inversão de
 # registrador, reencodificação de FSM) durante o match.
-set_svf ./reports/default.svf
+set_svf ../fm/reports/default.svf
 
 # 4. Design de referência (golden) — RTL pré-síntese
 
@@ -39,16 +39,16 @@ set_top i:/WORK/Vending_Top
 match
 # Verifica quais operações do SVF foram usadas com sucesso como guidance
 # e quais foram rejeitadas (precisam de investigação manual)
-report_svf_operation -status accepted > reports/formality_svf_accepted.rpt
-report_svf_operation -status rejected > reports/formality_svf_rejected.rpt
+report_svf_operation -status accepted > ../fm/reports/formality_svf_accepted.rpt
+report_svf_operation -status rejected > ../fm/reports/formality_svf_rejected.rpt
 # Inspecione o resultado do casamento antes de seguir para verify
-report_matched_points > reports/formality_matched.rpt
-report_unmatched_points > reports/formality_unmatched.rpt
+report_matched_points > ../fm/reports/formality_matched.rpt
+report_unmatched_points > ../fm/reports/formality_unmatched.rpt
 
 # 7. Prova de equivalência ponto a ponto
 verify
 # 8. Relatórios de sign-off
-eport_status -short > reports/formality_status.rpt
-report_passing_points > reports/formality_passing.rpt
-report_failing_points > reports/formality_failing.rpt
-report_unmatched_points > reports/formality_unmatched.rpt
+report_status -short > ../fm/reports/formality_status.rpt
+report_passing_points > ../fm/reports/formality_passing.rpt
+report_failing_points > ../fm/reports/formality_failing.rpt
+report_unmatched_points > ../fm/reports/formality_unmatched.rpt
