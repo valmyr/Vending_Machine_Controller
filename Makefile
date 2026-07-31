@@ -76,7 +76,7 @@ waves:run
 	verdi -ssf waves.fsdb -sswr tb_vending_machine.rc
 
 #Passo 5: Executar o Formality
-formality:
+formality:synthesis
 	cd $(SIM_DIR) &&\
 	fm_shell -f ../fm/formality.tcl
 #Limpeza

@@ -67,11 +67,11 @@ report_power > ../reports/power.rpt
 puts "Power Relatorio salvo em: power.rpt"
 
 # Relatório de violações de setup
-report_constraint -all_violators -check_type setup > ../reports/setup_violations.rpt
+report_constraint -all_violators  > ../reports/setup_violations.rpt
 puts "Setup Violations Relatorio salvo em: setup_violations.rpt"
 
 # Relatório de violações de hold
-report_constraint -all_violators -check_type hold > ../reports/hold_violations.rpt
+report_constraint -all_violators > ../reports/hold_violations.rpt
 puts "Hold Violations Relatorio salvo em: hold_violations.rpt"
 
 # 8. EXPORTAR NETLIST
@@ -98,5 +98,5 @@ puts "  - area_pos.rpt (area)"
 puts "  - timing_relatorio.rpt (timing)"
 puts "  - power.rpt (potencia)"
 puts "============================================================"
-exit
-start_gui
+#exit
+#start_gui
