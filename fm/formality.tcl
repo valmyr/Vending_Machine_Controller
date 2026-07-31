@@ -48,7 +48,7 @@ report_unmatched_points > reports/formality_unmatched.rpt
 # 7. Prova de equivalência ponto a ponto
 verify
 # 8. Relatórios de sign-off
-report_status -verbose > reports/formality_status.rpt
+eport_status -short > reports/formality_status.rpt
 report_passing_points > reports/formality_passing.rpt
 report_failing_points > reports/formality_failing.rpt
 report_unmatched_points > reports/formality_unmatched.rpt
