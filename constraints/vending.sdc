@@ -5,7 +5,7 @@
 #==============================================================================
 #Definição do Clock
 #==============================================================================
-create_clock -name sys_clk -period 20.0 [get_ports clk]
+create_clock -name sys_clk -period 1 [get_ports clk]
 #==============================================================================
 
 #Caracteristicas de Clock
@@ -22,3 +22,6 @@ set_input_delay -clock sys_clk -max 3.0 [all_inputs]
 #==============================================================================
 set_output_delay -clock sys_clk -max 3.0 [all_outputs]
 #==============================================================================
+
+set_driving_cell -lib_cell INVX1 -pin Y [all_inputs]
+set_load 0.05 [all_outputs]

@@ -7,7 +7,8 @@ TB_FILES=../list_file_tb.lst
 #Top do testbench
 TOP=tb
 
-
+CLK_PERIOD ?= 20
+ 
 #Passo 0: Criar diretório de simulação
 init:
 	mkdir -p $(SIM_DIR)
@@ -37,8 +38,9 @@ syntax_pos_impl:
 		 ../$(TB_FILES)
 
 synthesis:
-	cd $(SIM_DIR) 				  &&\
-	dc_shell -f ../synth/synth.tcl
+	sed -i '8s/.*/create_clock -name sys_clk -period $(CLK_PERIOD) [get_ports clk]/' constraints/vending.sdc
+	cd sim && CLK_PERIOD=$(CLK_PERIOD) dc_shell -f ../synth/synth.tcl
+
 
 #Passo 2: Compilação/Elaboração
 compile:syntax

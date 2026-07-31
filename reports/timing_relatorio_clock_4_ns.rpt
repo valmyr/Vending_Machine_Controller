@@ -1,0 +1,56 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : Vending_Top
+Version: X-2025.06-SP2
+Date   : Fri Jul 31 15:56:54 2026
+****************************************
+
+Operating Conditions: tt1p05v25c   Library: saed32rvt_tt1p05v25c
+Wire Load Model Mode: enclosed
+
+  Startpoint: u_mem_unit/price_reg[1]
+              (rising edge-triggered flip-flop clocked by sys_clk)
+  Endpoint: change_out[7]
+            (output port clocked by sys_clk)
+  Path Group: sys_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  Vending_Top        8000                  saed32rvt_tt1p05v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock sys_clk (rise edge)                               0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  u_mem_unit/price_reg[1]/CLK (DFFSSRX1_RVT)              0.00       0.00 r
+  u_mem_unit/price_reg[1]/Q (DFFSSRX1_RVT)                0.09       0.09 f
+  U242/Y (INVX1_RVT)                                      0.03       0.12 r
+  U240/Y (AND2X1_RVT)                                     0.04       0.16 r
+  U239/Y (AO22X1_RVT)                                     0.05       0.22 r
+  U244/Y (AOI21X1_RVT)                                    0.06       0.27 f
+  U243/Y (OR2X2_RVT)                                      0.05       0.32 f
+  U256/Y (AND2X1_RVT)                                     0.05       0.36 f
+  U255/Y (OA21X1_RVT)                                     0.05       0.41 f
+  U254/Y (OR2X1_RVT)                                      0.04       0.45 f
+  U337/Y (AOI21X1_RVT)                                    0.05       0.50 r
+  change_out[7] (out)                                     0.00       0.50 r
+  data arrival time                                                  0.50
+
+  clock sys_clk (rise edge)                               4.00       4.00
+  clock network delay (ideal)                             0.00       4.00
+  clock uncertainty                                      -0.50       3.50
+  output external delay                                  -3.00       0.50
+  data required time                                                 0.50
+  --------------------------------------------------------------------------
+  data required time                                                 0.50
+  data arrival time                                                 -0.50
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+1

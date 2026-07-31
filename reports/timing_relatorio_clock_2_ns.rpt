@@ -1,0 +1,61 @@
+Warning: There are infeasible paths detected in your design that were ignored during optimization. Please run 'report_timing -attributes' and/or 'create_qor_snapshot/query_qor_snapshot -infeasible_paths' to identify these paths.  (OPT-1721)
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : Vending_Top
+Version: X-2025.06-SP2
+Date   : Fri Jul 31 15:57:16 2026
+****************************************
+
+Operating Conditions: tt1p05v25c   Library: saed32rvt_tt1p05v25c
+Wire Load Model Mode: enclosed
+
+  Startpoint: coin_in[1] (input port clocked by sys_clk)
+  Endpoint: u_credit_unit/credit_reg[6]
+            (rising edge-triggered flip-flop clocked by sys_clk)
+  Path Group: sys_clk
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  Vending_Top        8000                  saed32rvt_tt1p05v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock sys_clk (rise edge)                               0.00       0.00
+  clock network delay (ideal)                             0.00       0.00
+  input external delay                                    3.00       3.00 r
+  coin_in[1] (in)                                         0.00       3.00 r
+  U415/Y (INVX0_RVT)                                      0.04       3.04 f
+  U421/Y (OA21X1_RVT)                                     0.05       3.09 f
+  U422/Y (NOR2X0_RVT)                                     0.06       3.15 r
+  U423/Y (NAND2X0_RVT)                                    0.04       3.19 f
+  U266/Y (NOR2X0_RVT)                                     0.06       3.25 r
+  U263/Y (INVX0_RVT)                                      0.02       3.27 f
+  U262/Y (NOR2X0_RVT)                                     0.06       3.33 r
+  U260/Y (OR2X1_RVT)                                      0.05       3.38 r
+  U305/Y (AO21X1_RVT)                                     0.05       3.42 r
+  U306/Y (NOR2X0_RVT)                                     0.06       3.49 f
+  U343/Y (OR3X1_RVT)                                      0.05       3.54 f
+  U347/Y (AOI21X1_RVT)                                    0.06       3.60 r
+  U346/Y (NOR2X0_RVT)                                     0.05       3.66 f
+  u_credit_unit/credit_reg[6]/D (DFFX2_RVT)               0.01       3.67 f
+  data arrival time                                                  3.67
+
+  clock sys_clk (rise edge)                               2.00       2.00
+  clock network delay (ideal)                             0.00       2.00
+  clock uncertainty                                      -0.50       1.50
+  u_credit_unit/credit_reg[6]/CLK (DFFX2_RVT)             0.00       1.50 r
+  library setup time                                     -0.03       1.47
+  data required time                                                 1.47
+  --------------------------------------------------------------------------
+  data required time                                                 1.47
+  data arrival time                                                 -3.67
+  --------------------------------------------------------------------------
+  slack (VIOLATED)                                                  -2.20
+
+
+1

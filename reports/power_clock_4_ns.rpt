@@ -4,7 +4,7 @@ Report : power
         -analysis_effort low
 Design : Vending_Top
 Version: X-2025.06-SP2
-Date   : Fri Jul 31 11:57:01 2026
+Date   : Fri Jul 31 15:56:54 2026
 ****************************************
 
 
@@ -35,12 +35,12 @@ Attributes
 i - Including register clock pin internal power
 
 
-  Cell Internal Power  =  25.5863 uW   (97%)
-  Net Switching Power  = 898.6393 nW    (3%)
+  Cell Internal Power  = 118.6888 uW   (95%)
+  Net Switching Power  =   6.1778 uW    (5%)
                          ---------
-Total Dynamic Power    =  26.4849 uW  (100%)
+Total Dynamic Power    = 124.8667 uW  (100%)
 
-Cell Leakage Power     =  86.7570 uW
+Cell Leakage Power     = 118.1066 uW
 
 
                  Internal         Switching           Leakage            Total
@@ -49,10 +49,10 @@ Power Group      Power            Power               Power              Power  
 io_pad             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 memory             0.0000            0.0000            0.0000            0.0000  (   0.00%)
 black_box          0.0000            0.0000            0.0000            0.0000  (   0.00%)
-clock_network     24.0349            0.0000            0.0000           24.0349  (  21.22%)  i
-register           0.4634            0.2392        5.8702e+07           59.4047  (  52.46%)
+clock_network    103.3929            0.0000            0.0000          103.3929  (  42.55%)  i
+register           3.2885            1.2467        6.0930e+07           65.4656  (  26.94%)
 sequential         0.0000            0.0000            0.0000            0.0000  (   0.00%)
-combinational      1.0880            0.6594        2.8055e+07           29.8023  (  26.32%)
+combinational     12.0074            4.9311        5.7176e+07           74.1147  (  30.50%)
 --------------------------------------------------------------------------------------------------
-Total             25.5863 uW         0.8986 uW     8.6757e+07 pW       113.2419 uW
+Total            118.6888 uW         6.1778 uW     1.1811e+08 pW       242.9733 uW
 1

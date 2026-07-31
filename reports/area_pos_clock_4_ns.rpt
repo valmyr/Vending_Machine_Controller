@@ -1,0 +1,44 @@
+ 
+****************************************
+Report : area
+Design : Vending_Top
+Version: X-2025.06-SP2
+Date   : Fri Jul 31 15:56:54 2026
+****************************************
+
+Information: Updating design information... (UID-85)
+Library(s) Used:
+
+    saed32rvt_tt1p05v25c (File: /home/valmir.silva/Vending_Machine_Controller/lib/saed32rvt_tt1p05v25c.db)
+
+Number of ports:                           29
+Number of nets:                           401
+Number of cells:                          371
+Number of combinational cells:            307
+Number of sequential cells:                59
+Number of macros/black boxes:               0
+Number of buf/inv:                         51
+Number of references:                      31
+
+Combinational area:                710.332489
+Buf/Inv area:                       67.856449
+Noncombinational area:             394.431500
+Macro/Black Box area:                0.000000
+Net Interconnect area:             208.329847
+
+Total cell area:                  1104.763989
+Total area:                       1313.093837
+
+Hierarchical area distribution
+------------------------------
+
+                                  Global cell area          Local cell area
+                                  ------------------  --------------------------- 
+Hierarchical cell                 Absolute   Percent  Combi-    Noncombi-  Black-
+                                  Total      Total    national  national   boxes   Design
+--------------------------------  ---------  -------  --------  ---------  ------  ---------
+Vending_Top                       1104.7640    100.0  710.3325   394.4315  0.0000  Vending_Top
+--------------------------------  ---------  -------  --------  ---------  ------  ---------
+Total                                                 710.3325   394.4315  0.0000
+
+1

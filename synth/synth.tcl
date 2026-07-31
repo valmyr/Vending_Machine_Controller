@@ -6,11 +6,13 @@
 # 1. CARREGAR CONFIGURAÇÃO
 source ../synth/.synopsys_dc.setup
 
-# 2. LEAR O ARQUIVO RTL (SYSTEMVERILOG)
+# 2. LEAR O ARQUIVO RTL (SYSTEMVERILOG) E o CLK_PERIOD
 
 set FILE_LIST [open "../list_file_dut.lst" r]
 set SV_FILES [split [string trim [read $FILE_LIST]] "\n"]
 close $FILE_LIST
+
+set clk_period $env(CLK_PERIOD)
 
 analyze -format sverilog $SV_FILES
 
@@ -55,24 +57,24 @@ puts "RELATORIOS POS-SINTESE"
 puts "============================================================"
 
 # Relatório de área
-report_area -hierarchy > ../reports/area_pos.rpt
-puts "\nArea Relatorio salvo em: area_pos.rpt"
+report_area -hierarchy > ../reports/area_pos_clock_${clk_period}_ns.rpt
+puts "\nArea Relatorio salvo em: area_pos_${clk_period}_ns.rpt"
 
 # Relatório de timing (setup)
-report_timing > ../reports/timing_relatorio.rpt
-puts "Timing Relatorio salvo em: timing_relatorio.rpt"
+report_timing > ../reports/timing_relatorio_clock_${clk_period}_ns.rpt
+puts "Timing Relatorio salvo em: timing_relatorio_${clk_period}_ns.rpt"
 
 # Relatório de power
-report_power > ../reports/power.rpt
-puts "Power Relatorio salvo em: power.rpt"
+report_power > ../reports/power_clock_${clk_period}_ns.rpt
+puts "Power Relatorio salvo em: power_${clk_period}_ns.rpt"
 
 # Relatório de violações de setup
-report_constraint -all_violators  > ../reports/setup_violations.rpt
-puts "Setup Violations Relatorio salvo em: setup_violations.rpt"
+report_constraint -all_violators  > ../reports/setup_violations_clock_${clk_period}_ns.rpt
+puts "Setup Violations Relatorio salvo em: setup_violations_${clk_period}_ns.rpt"
 
 # Relatório de violações de hold
-report_constraint -all_violators > ../reports/hold_violations.rpt
-puts "Hold Violations Relatorio salvo em: hold_violations.rpt"
+report_constraint -all_violators > ../reports/hold_violations_clock_${clk_period}_ns.rpt
+puts "Hold Violations Relatorio salvo em: hold_violations_${clk_period}_ns.rpt"
 
 # 8. EXPORTAR NETLIST
 # Formato Verilog (para simulação)
@@ -98,5 +100,8 @@ puts "  - area_pos.rpt (area)"
 puts "  - timing_relatorio.rpt (timing)"
 puts "  - power.rpt (potencia)"
 puts "============================================================"
+
+puts $clk_period
 exit
 #start_gui
+
