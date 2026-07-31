@@ -98,5 +98,5 @@ puts "  - area_pos.rpt (area)"
 puts "  - timing_relatorio.rpt (timing)"
 puts "  - power.rpt (potencia)"
 puts "============================================================"
-#exit
+exit
 #start_gui
